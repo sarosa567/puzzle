@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>木兰辞 · 数字绘本拼图</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#ea2a33',
+            'background-light': '#f8f6f6',
+            'background-dark': '#211111',
+          },
+          fontFamily: {
+            display: ['Noto Serif', 'serif'],
+          },
+          borderRadius: {
+            DEFAULT: '0.25rem',
+            lg: '0.5rem',
+            xl: '0.75rem',
+            full: '9999px',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    @font-face {
+      font-family: 'AaYangEXing';
+      src: url('aayangexing.ttf') format('truetype');
+      font-display: swap;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #fdf7ed 0, #f5f1ea 40%, #ebdfcf 100%);
+      color: #333;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    #app {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 12px 12px 24px;
+    }
+    header.app-header {
+      text-align: center;
+      padding: 8px 4px 4px;
+    }
+    header.app-header h1 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: 0.08em;
+      font-family: "SimSun", "Songti SC", "宋体", serif;
+    }
+    header.app-header p {
+      margin: 4px 0 0;
+      font-size: 13px;
+      color: #666;
+      font-family: "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont,
+        "Segoe UI", system-ui, sans-serif;
+    }
+    [data-view] { display: none; }
+    .view-section {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.9);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    section[data-view="home"] {
+      margin-top: 0;
+      padding: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+    .btn {
+      padding: 8px 16px;
+      border-radius: 5px;
+      border: none;
+      background: #b2875b;
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .btn:hover { background: #9a7148; }
+    .btn.secondary {
+      background: #e5d7c4;
+      color: #654433;
+    }
+    .btn.secondary:hover {
+      background: #d2c2aa;
+    }
+    .home-hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      text-align: center;
+    }
+    .home-cover {
+      width: 100%;
+      max-width: 360px;
+      aspect-ratio: 1 / 1;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #ddd;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+    }
+    .home-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .home-title-block {
+      margin-top: 4px;
+      text-align: center;
+      color: #fff;
+    }
+    .home-hero-inner {
+      transform: translateY(-40px);
+    }
+    #home-main-title {
+      font-family: 'AaYangEXing', "SimSun", "Songti SC", "宋体", serif;
+    }
+    #home-main-title {
+      font-size: 68px;
+      letter-spacing: 0.18em;
+    }
+    #home-subtitle {
+      font-family: "SimSun", "Songti SC", "宋体", serif;
+      margin-top: 4px;
+      font-size: 18px;
+      letter-spacing: 0.18em;
+    }
+    .home-toggle-row {
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .home-toggle-btn {
+      min-width: 150px;
+      height: 46px;
+      padding: 0 22px;
+      border: none;
+      background-color: transparent;
+      background-image: url('image/default_btn.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      cursor: pointer;
+      color: #5d3b28;
+      font-size: 16px;
+      letter-spacing: 0.12em;
+      font-family: "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont,
+        "Segoe UI", system-ui, sans-serif;
+    }
+    .home-toggle-btn-active {
+      background-image: url('image/atived_btn.png');
+      color: #fff;
+    }
+    .puzzle-action-btn {
+      min-width: 150px;
+    }
+    #btn-hint {
+      background-color: transparent;
+      background-image: url('image/hint.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      color: #5d3b28;
+      padding: 10px 28px;
+    }
+    .chapter-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+    .chapter-btn {
+      width: 100%;
+      text-align: left;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: none;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .chapter-btn.unlocked {
+      background: #f7efe2;
+      color: #5d3b28;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    }
+    .chapter-btn.unlocked span {
+      font-size: 12px;
+      color: #a2764a;
+    }
+    .chapter-btn.locked {
+      background: #e5e5e5;
+      color: #999;
+      cursor: default;
+    }
+    .chapter-progress {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 8px;
+    }
+    .chapter-path-container {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+      margin: 0 auto;
+      padding: 16px 0 24px;
+    }
+    .chapter-path-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .chapter-path-svg path {
+      fill: none;
+      stroke: #4b332f;
+      stroke-width: 6;
+      stroke-dasharray: 18 12;
+      stroke-linecap: round;
+      opacity: 0.95;
+    }
+    .chapter-node {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      border: 2px solid transparent;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+      background: rgba(247,239,226,0.92);
+      color: #5d3b28;
+    }
+    .chapter-node.unlocked {
+      background: #ff4c4c;
+      color: #fff;
+      border-color: #ffd4c6;
+      box-shadow:
+        0 0 0 4px rgba(255,112,112,0.45),
+        0 10px 20px rgba(0,0,0,0.45);
+    }
+    .chapter-node.locked {
+      background: #435567;
+      color: #dde5f0;
+      border-color: #6a7c8d;
+      cursor: default;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.55);
+    }
+    section[data-view="chapters"] {
+      margin-top: 0;
+      padding: 0;
+      border-radius: 0;
+      box-shadow: none;
+      background-image: url('image/story_bg.png');
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+    .chapter-back-node {
+      background: #f7efe2;
+      color: #f0e4d4;
+      border-color: #f0e4d4;
+      font-size: 12px;
+    }
+    .puzzle-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      padding: 4px 8px 12px;
+      min-height: 100vh;
+    }
+    .puzzle-header-line {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #555;
+      padding-bottom: 4px;
+      margin-bottom: 6px;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+    #puzzle-title,
+    #success-title {
+      font-family: "SimSun", "Songti SC", "宋体", serif;
+      letter-spacing: 0.04em;
+    }
+    #success-title {
+      display: none;
+    }
+    #puzzle-title {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 16px; /* 与 .btn 一致，保证高度接近 */
+      border-radius: 5px;
+      background: #e5d7c4;
+      color: #654433;
+      font-size: 14px;
+    }
+    #puzzle-subtitle,
+    #success-poem,
+    #success-narration {
+      font-family: "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont,
+        "Segoe UI", system-ui, sans-serif;
+    }
+    #puzzle-subtitle {
+      display: none;
+    }
+    #puzzle-canvas {
+      width: 92%;
+      max-width: 800px;
+      margin: 0 auto;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fbf7f1;
+      border: 2px dashed rgba(120, 96, 72, 0.18);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+    .puzzle-poem-card {
+      width: 92%;
+      max-width: 800px;
+      margin: 6px auto 10px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: rgba(251,247,241,0.96);
+      border: 2px solid rgba(120, 96, 72, 0.8);
+      box-shadow:
+        0 0 0 1px rgba(120, 96, 72, 0.45) inset,
+        0 4px 10px rgba(0,0,0,0.10);
+    }
+    .puzzle-poem-heading {
+      margin: 0 0 4px;
+      font-size: 18px;
+      text-align: center;
+      font-family: "SimSun", "Songti SC", "宋体", serif;
+      letter-spacing: 0.12em;
+      color: #5d3b28;
+    }
+    .puzzle-poem-text {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.7;
+      text-align: center;
+      font-family: "SimSun", "Songti SC", "宋体", serif;
+      white-space: pre-line;
+    }
+    .puzzle-main-area {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding-bottom: 56px; /* 为右下角提示按钮预留空间 */
+      margin-top: 4px;
+    }
+    .puzzle-main-area .btn-hint-wrapper {
+      position: absolute;
+      right: 8px;
+      bottom: 10vh;
+      display: flex;
+      gap: 8px;
+    }
+    section[data-view="chapters"] .puzzle-header-line {
+      background: rgba(43, 30, 30, 0.96);
+      color: #f7ede3;
+      padding: 10px 12px;
+      margin: 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    }
+    section[data-view="chapters"] .puzzle-header-line strong {
+      font-family: "SimSun", "Songti SC", "宋体", serif;
+      font-size: 16px;
+      letter-spacing: 0.06em;
+    }
+    section[data-view="chapters"] .chapter-progress {
+      color: #d7c9bc;
+    }
+    section[data-view="puzzle"] {
+      margin-top: 0;
+      padding: 0;
+      border-radius: 0;
+      box-shadow: none;
+      min-height: 100vh;
+      background-image: url('image/game_bg.png');
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+    .success-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .success-image-wrapper {
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+      background: #ddd;
+    }
+    .success-image-wrapper img {
+      width: 100%;
+      display: block;
+    }
+    .success-text {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .success-text h2 {
+      margin: 0 0 4px;
+      font-size: 18px;
+    }
+    .success-text p {
+      margin: 2px 0;
+    }
+    .artifact-list {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .artifact-list-item {
+      flex: 0 0 auto;
+    }
+    .artifact-highlight-btn {
+      border: none;
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .artifact-highlight-img {
+      width: 72px;
+      height: 72px;
+      border-radius: 999px;
+      border: 3px solid #d7c3a7;
+      box-shadow:
+        0 0 0 4px rgba(247,239,226,0.9),
+        0 0 16px rgba(255,219,160,0.75),
+        0 8px 16px rgba(0,0,0,0.35);
+      object-fit: cover;
+      background: #ddd;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .artifact-highlight-label {
+      font-size: 12px;
+      color: #5d3b28;
+    }
+    .artifact-highlight-btn:hover .artifact-highlight-img {
+      transform: translateY(-2px);
+      box-shadow:
+        0 0 0 4px rgba(255,208,160,0.95),
+        0 0 24px rgba(255,190,130,0.9),
+        0 12px 24px rgba(0,0,0,0.5);
+    }
+    .success-actions {
+      margin-top: 8px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    /* 器物详情弹窗 */
+    #artifact-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 24px 12px;
+      z-index: 70;
+      overflow-y: auto;
+    }
+    .artifact-modal-content {
+      max-width: 420px;
+      width: 100%;
+      max-height: 90vh;
+      height: 80vh;
+      background: #111;
+      border-radius: 18px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+      overflow: hidden;
+      color: #f7efe2;
+      display: flex;
+      flex-direction: column;
+    }
+    .artifact-modal-image-block {
+      position: relative;
+      background: #111;
+      flex: 0 0 50%;
+      max-height: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 12px 8px;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    .artifact-modal-image-block img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+    .artifact-modal-close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      border: none;
+      background: rgba(0,0,0,0.6);
+      color: #f7efe2;
+      cursor: pointer;
+      font-size: 18px;
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .artifact-modal-text {
+      background: #f7efe2;
+      color: #222;
+      padding: 16px 18px 20px;
+      font-size: 14px;
+      line-height: 1.7;
+      flex: 1 1 auto;
+      overflow-y: auto;
+    }
+    .artifact-modal-text h2 {
+      margin: 0 0 6px;
+      font-size: 20px;
+      font-family: "SimSun", "Songti SC", "宋体", serif;
+    }
+    .artifact-modal-desc {
+      margin: 8px 0 0;
+      font-size: 14px;
+    }
+    #hint-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 60;
+    }
+    .hint-modal-content {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+      background: #000;
+    }
+    .hint-modal-content img {
+      display: block;
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+    }
+    #settings-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 65;
+    }
+    .settings-modal-content {
+      max-width: 320px;
+      width: 100%;
+      border-radius: 14px;
+      background: #f7efe2;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+      padding: 14px 16px 16px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #4b3320;
+      border: 1px solid rgba(255,255,255,0.6);
+    }
+    .settings-modal-title {
+      margin: 0 0 8px;
+      font-size: 16px;
+      text-align: center;
+      font-family: "SimSun", "Songti SC", "宋体", serif;
+    }
+    .settings-modal-row {
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .settings-toggle-label {
+      font-size: 14px;
+      color: #4b3320;
+    }
+    #bgm-toggle {
+      accent-color: #8b1a1a;
+    }
+    .settings-modal-footer {
+      margin-top: 12px;
+      text-align: right;
+    }
+    @media (max-width: 600px) {
+      header.app-header h1 { font-size: 18px; }
+      .view-section { padding: 10px; }
+    }
+  </style>
+  <script src="https://flbulgarelli.github.io/headbreaker/js/headbreaker.js"></script>
+  <script src="mulan_data.js" defer></script>
+  <script src="mulan_app.js" defer></script>
+</head>
+<body>
+  <div id="app">
+
+    <!-- 首页 -->
+    <section class="view-section" data-view="home">
+      <div
+        class="relative home-hero-inner flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat p-4 sm:p-6"
+        style="background-image: linear-gradient(rgba(33,17,17,0.45), rgba(33,17,17,0.8)), url('image/hero_bg.png');">
+        <div class="home-title-block">
+          <div id="home-main-title">木兰辞</div>
+          <div id="home-subtitle">数字绘本拼图</div>
+        </div>
+        <div id="btn-start" class="mt-5 w-full max-w-xs cursor-pointer">
+          <img
+            src="image/01 拷贝.jpg"
+            alt="木兰辞绘本封面"
+            class="aspect-square w-full h-auto object-cover rounded-xl shadow-2xl border-4 border-white/20 transition-transform duration-300 hover:scale-105"
+          />
+        </div>
+        <div class="home-toggle-row">
+          <button id="btn-home-start" class="home-toggle-btn home-toggle-btn-active">进入游戏</button>
+          <button id="btn-home-settings" class="home-toggle-btn">设置</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 章节列表（曲线地图） -->
+    <section class="view-section" data-view="chapters">
+      <div class="puzzle-header-line" style="margin-bottom: 4px;">
+        <button id="btn-chapters-home" class="btn secondary" style="padding-inline:10px; font-size:12px;">
+          返回首页
+        </button>
+        <strong>章节选择</strong>
+        <span id="progress-text" class="chapter-progress">已解锁章节：1 / 31</span>
+      </div>
+      <div id="chapter-map" class="chapter-path-container">
+        <svg class="chapter-path-svg" viewBox="0 0 320 800" preserveAspectRatio="none">
+          <path id="chapter-path" d="M 160,20 C 280,150 40,280 160,410 C 280,540 40,670 160,750"></path>
+        </svg>
+      </div>
+    </section>
+
+    <!-- 拼图页 -->
+    <section class="view-section" data-view="puzzle">
+      <div class="puzzle-layout">
+        <div class="puzzle-header-line">
+          <div>
+            <strong id="puzzle-title">章节标题</strong>
+          </div>
+          <button id="btn-back-chapters" class="btn secondary">返回章节</button>
+        </div>
+        <div class="puzzle-poem-card">
+          <div class="puzzle-poem-heading">前章余韵</div>
+          <p id="puzzle-poem-text" class="puzzle-poem-text">
+            本节的诗句会显示在这里。
+          </p>
+        </div>
+        <div class="puzzle-main-area">
+          <div id="puzzle-canvas"></div>
+          <div class="btn-hint-wrapper">
+            <button id="btn-hint" class="btn secondary puzzle-action-btn">提示</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 完成页：诗句 + 旁白 + 器物入口 -->
+    <section class="view-section" data-view="success">
+      <div class="success-layout">
+        <div class="success-image-wrapper">
+          <img id="success-image" alt="本节完整插画" />
+        </div>
+        <div class="success-text">
+          <h2 id="success-title">章节标题</h2>
+          <p id="success-poem" style="font-weight: 600;">诗句占位</p>
+          <p id="success-narration">旁白占位。</p>
+          <p id="artifact-section-title" style="margin-top:6px; font-size:13px; color:#555;">器物小档案：</p>
+          <ul id="artifact-list" class="artifact-list"></ul>
+        </div>
+        <div class="success-actions">
+          <button id="btn-success-back" class="btn secondary">返回章节地图</button>
+          <button id="btn-success-next" class="btn">前往下一节</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <audio id="bgm-audio" src="bmg/bgm.mp3" preload="auto" loop></audio>
+
+  <div id="hint-modal">
+    <div class="hint-modal-content">
+      <img id="hint-image" alt="完整插画提示" />
+    </div>
+  </div>
+  
+  <!-- 设置弹窗 -->
+  <div id="settings-modal">
+    <div class="settings-modal-content">
+      <h3 class="settings-modal-title">设置</h3>
+      <div class="settings-modal-row">
+        <span class="settings-toggle-label">背景音乐</span>
+        <label style="display:flex; align-items:center; gap:6px;">
+          <input type="checkbox" id="bgm-toggle" />
+          <span style="font-size:13px;">开启</span>
+        </label>
+      </div>
+      <div class="settings-modal-footer">
+        <button id="settings-close" class="btn secondary">关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 器物详情弹窗 -->
+  <div id="artifact-modal">
+    <div class="artifact-modal-content">
+      <div class="artifact-modal-image-block">
+        <img id="artifact-modal-image" alt="器物图片" />
+        <button
+          id="artifact-modal-close"
+          class="artifact-modal-close-btn"
+          aria-label="关闭">
+          ×
+        </button>
+      </div>
+      <div class="artifact-modal-text">
+        <h2 id="artifact-modal-name">器物名称</h2>
+        <p id="artifact-modal-desc" class="artifact-modal-desc"></p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
