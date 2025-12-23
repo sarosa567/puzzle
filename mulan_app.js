@@ -313,14 +313,16 @@ function openVideoArtifactAtStop(stop) {
   // 进入器具弹窗必须暂停
   try {
     forceVideoInline(videoEl);
-    videoEl.pause();
-    suppressSeekHandler = true;
-    if (typeof stop.at === 'number' && Number.isFinite(stop.at)) {
-      videoEl.currentTime = Math.min(stop.at, videoEl.duration || stop.at);
-    }
-    setTimeout(() => {
-      suppressSeekHandler = false;
-    }, 0);
+    suppressSeekUntilSettled(videoEl, () => {
+      videoEl.pause();
+      if (typeof stop.at === 'number' && Number.isFinite(stop.at)) {
+        const target = Math.min(stop.at, videoEl.duration || stop.at);
+        // Avoid triggering an extra async `seeking` when we're already basically at the stop point.
+        if (Math.abs((videoEl.currentTime || 0) - target) > 0.15) {
+          videoEl.currentTime = target;
+        }
+      }
+    });
   } catch (_) {
     suppressSeekHandler = false;
   }
@@ -476,6 +478,32 @@ function forceVideoInline(videoEl) {
   } catch (_) {}
 }
 
+function suppressSeekUntilSettled(videoEl, action) {
+  if (!videoEl) return;
+  let cleared = false;
+  const clear = () => {
+    if (cleared) return;
+    cleared = true;
+    suppressSeekHandler = false;
+    try {
+      videoEl.removeEventListener('seeked', clear);
+    } catch (_) {}
+  };
+
+  suppressSeekHandler = true;
+  try {
+    // Some mobile browsers fire `seeking/seeked` async; keep suppression until `seeked`,
+    // plus a timeout fallback to avoid getting stuck.
+    videoEl.addEventListener('seeked', clear, { once: true });
+  } catch (_) {}
+
+  try {
+    action();
+  } finally {
+    setTimeout(clear, 600);
+  }
+}
+
 function showView(id) {
   const views = document.querySelectorAll('[data-view]');
   views.forEach((v) => {
@@ -569,14 +597,15 @@ function showVideoStopPrompt(stop) {
   if (videoEl) {
     try {
       forceVideoInline(videoEl);
-      videoEl.pause();
-      suppressSeekHandler = true;
-      if (typeof stop.at === 'number' && Number.isFinite(stop.at)) {
-        videoEl.currentTime = Math.min(stop.at, videoEl.duration || stop.at);
-      }
-      setTimeout(() => {
-        suppressSeekHandler = false;
-      }, 0);
+      suppressSeekUntilSettled(videoEl, () => {
+        videoEl.pause();
+        if (typeof stop.at === 'number' && Number.isFinite(stop.at)) {
+          const target = Math.min(stop.at, videoEl.duration || stop.at);
+          if (Math.abs((videoEl.currentTime || 0) - target) > 0.15) {
+            videoEl.currentTime = target;
+          }
+        }
+      });
     } catch (_) {
       suppressSeekHandler = false;
     }
@@ -1007,14 +1036,16 @@ function openVideoStopPuzzle() {
   hideVideoStopPrompt();
 
   try {
-    videoEl.pause();
-    suppressSeekHandler = true;
-    if (typeof puzzle.at === 'number' && Number.isFinite(puzzle.at)) {
-      videoEl.currentTime = Math.min(puzzle.at, videoEl.duration || puzzle.at);
-    }
-    setTimeout(() => {
-      suppressSeekHandler = false;
-    }, 0);
+    forceVideoInline(videoEl);
+    suppressSeekUntilSettled(videoEl, () => {
+      videoEl.pause();
+      if (typeof puzzle.at === 'number' && Number.isFinite(puzzle.at)) {
+        const target = Math.min(puzzle.at, videoEl.duration || puzzle.at);
+        if (Math.abs((videoEl.currentTime || 0) - target) > 0.15) {
+          videoEl.currentTime = target;
+        }
+      }
+    });
   } catch (_) {
     suppressSeekHandler = false;
   }
