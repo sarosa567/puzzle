@@ -473,9 +473,24 @@ function forceVideoInline(videoEl) {
   // Standard fullscreen API (some Android browsers).
   try {
     if (document.fullscreenElement && typeof document.exitFullscreen === 'function') {
-      document.exitFullscreen().catch(() => {});
+      const p = document.exitFullscreen();
+      if (p && typeof p.catch === 'function') p.catch(() => {});
     }
   } catch (_) {}
+}
+
+function showVideoTapOverlay() {
+  const overlay = $('video-tap-overlay');
+  if (!overlay) return;
+  overlay.style.display = 'grid';
+  overlay.setAttribute('aria-hidden', 'false');
+}
+
+function hideVideoTapOverlay() {
+  const overlay = $('video-tap-overlay');
+  if (!overlay) return;
+  overlay.style.display = 'none';
+  overlay.setAttribute('aria-hidden', 'true');
 }
 
 function suppressSeekUntilSettled(videoEl, action) {
@@ -645,6 +660,7 @@ function hideVideoStopPrompt() {
   pendingVideoStop = null;
   pendingVideoPuzzle = null;
   setNativeVideoControlsSuppressed($('chapter-video'), false);
+  hideVideoTapOverlay();
   restoreVideoPlaybackRate($('chapter-video'));
   setVideoStopHintArtifact(null);
 }
@@ -664,6 +680,7 @@ function showVideoStopPrompt(stop) {
   pendingVideoStop = stop;
   overlay.style.display = 'grid';
   videoPromptVisible = true;
+  hideVideoTapOverlay();
 
   // 停点出现时就暂停视频（不自动消失，必须用户手动选择）
   const videoEl = $('chapter-video');
@@ -1186,6 +1203,10 @@ function openVideoChapter(index) {
       // Keep native controls during normal playback, but we'll suppress them while overlays are open.
       videoEl.controls = true;
       videoEl.setAttribute('controls', '');
+      // The story videos are meant to be silent; keep muted to improve autoplay/inline behavior on mobile.
+      videoEl.muted = true;
+      videoEl.defaultMuted = true;
+      videoEl.setAttribute('muted', '');
       videoEl.pause();
       videoEl.src = chapter.video;
       videoEl.load();
@@ -1202,8 +1223,17 @@ function openVideoChapter(index) {
 
   if (videoEl) {
     setupVideoStopLogic(videoEl, chapter.id);
+    const onPlay = () => hideVideoTapOverlay();
+    videoEl.removeEventListener('play', onPlay);
+    videoEl.addEventListener('play', onPlay);
+
     const p = videoEl.play();
-    if (p && typeof p.catch === 'function') p.catch(() => {});
+    if (p && typeof p.catch === 'function') {
+      p.catch(() => {
+        // Some browsers (e.g. MIUI/WeChat) require a user gesture. Show a simple tap-to-play overlay.
+        showVideoTapOverlay();
+      });
+    }
     videoEl.onended = () => {
       stopVideoPlayback();
       showView('segments');
@@ -1758,6 +1788,26 @@ function initGlobalEvents() {
   if (stopPuzzleBtn) {
     stopPuzzleBtn.addEventListener('click', () => {
       openVideoStopPuzzle();
+    });
+  }
+
+  const tapPlayBtn = $('btn-video-tap-play');
+  if (tapPlayBtn) {
+    tapPlayBtn.addEventListener('click', () => {
+      const videoEl = $('chapter-video');
+      hideVideoTapOverlay();
+      if (!videoEl) return;
+      try {
+        forceVideoInline(videoEl);
+        const p = videoEl.play();
+        if (p && typeof p.catch === 'function') {
+          p.catch(() => {
+            showVideoTapOverlay();
+          });
+        }
+      } catch (_) {
+        showVideoTapOverlay();
+      }
     });
   }
 

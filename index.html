@@ -718,6 +718,15 @@
       padding: 18px 12px;
       z-index: 4; /* 在视频上方、器具卡片下方 */
     }
+    #video-tap-overlay {
+      position: absolute;
+      inset: 0;
+      display: none;
+      place-items: center;
+      background: rgba(0,0,0,0.20);
+      padding: 18px 12px;
+      z-index: 3; /* 在视频上方、停点提示下方 */
+    }
     .video-stop-prompt-inner {
       display: grid;
       place-items: center;
@@ -1664,6 +1673,7 @@
           </div>
           <video
             id="chapter-video"
+            muted
             playsinline
             webkit-playsinline
             x5-playsinline
@@ -1672,6 +1682,14 @@
             controlslist="nofullscreen noremoteplayback noplaybackrate"
             disablepictureinpicture
           ></video>
+          <div id="video-tap-overlay" aria-hidden="true">
+            <div class="video-stop-prompt-inner">
+              <p class="video-stop-hint-text">点击开始播放</p>
+              <div class="video-stop-actions">
+                <button id="btn-video-tap-play" class="btn" type="button">播放</button>
+              </div>
+            </div>
+          </div>
           <div id="video-stop-prompt" aria-hidden="true">
             <div class="video-stop-prompt-inner">
               <div class="video-stop-hint-wrapper">
@@ -1680,9 +1698,9 @@
               </div>
               <p class="video-stop-hint-text">发现器具介绍，点击打开或忽略继续观看</p>
               <div class="video-stop-actions">
-                <button id="btn-video-stop-open" class="btn">打开介绍</button>
-                <button id="btn-video-stop-puzzle" class="btn" style="display:none;">玩拼图</button>
-                <button id="btn-video-stop-ignore" class="btn secondary">继续观看</button>
+                <button id="btn-video-stop-open" class="btn" type="button">打开介绍</button>
+                <button id="btn-video-stop-puzzle" class="btn" type="button" style="display:none;">玩拼图</button>
+                <button id="btn-video-stop-ignore" class="btn secondary" type="button">继续观看</button>
               </div>
             </div>
           </div>
