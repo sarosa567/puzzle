@@ -538,6 +538,43 @@ function disableVideoFullscreen(videoEl) {
   } catch (_) {}
 }
 
+function setNativeVideoControlsSuppressed(videoEl, suppressed) {
+  if (!videoEl) return;
+  const next = !!suppressed;
+  if (!!videoEl.__nativeControlsSuppressed === next) return;
+
+  if (next) {
+    try {
+      videoEl.__savedControls = !!videoEl.controls;
+      videoEl.__savedPointerEvents = videoEl.style.pointerEvents || '';
+    } catch (_) {}
+
+    try {
+      // Remove native overlays like +/-10s while the artifact/prompt UI is on top.
+      videoEl.controls = false;
+      videoEl.removeAttribute('controls');
+    } catch (_) {}
+    try {
+      videoEl.style.pointerEvents = 'none';
+    } catch (_) {}
+  } else {
+    try {
+      const prevControls = videoEl.__savedControls;
+      if (typeof prevControls === 'boolean') {
+        videoEl.controls = prevControls;
+        if (prevControls) videoEl.setAttribute('controls', '');
+        else videoEl.removeAttribute('controls');
+      }
+    } catch (_) {}
+    try {
+      const prevPe = videoEl.__savedPointerEvents;
+      videoEl.style.pointerEvents = typeof prevPe === 'string' ? prevPe : '';
+    } catch (_) {}
+  }
+
+  videoEl.__nativeControlsSuppressed = next;
+}
+
 function showView(id) {
   const views = document.querySelectorAll('[data-view]');
   views.forEach((v) => {
@@ -597,6 +634,7 @@ function hideVideoArtifactOverlay() {
   }
   videoOverlayVisible = false;
   document.body.classList.remove('video-artifact-open');
+  setNativeVideoControlsSuppressed($('chapter-video'), false);
   restoreVideoPlaybackRate($('chapter-video'));
 }
 
@@ -606,6 +644,7 @@ function hideVideoStopPrompt() {
   videoPromptVisible = false;
   pendingVideoStop = null;
   pendingVideoPuzzle = null;
+  setNativeVideoControlsSuppressed($('chapter-video'), false);
   restoreVideoPlaybackRate($('chapter-video'));
   setVideoStopHintArtifact(null);
 }
@@ -631,6 +670,7 @@ function showVideoStopPrompt(stop) {
   if (videoEl) {
     try {
       forceVideoInline(videoEl);
+      setNativeVideoControlsSuppressed(videoEl, true);
       suppressSeekUntilSettled(videoEl, () => {
         videoEl.pause();
         if (typeof stop.at === 'number' && Number.isFinite(stop.at)) {
@@ -688,6 +728,7 @@ function showVideoArtifactOverlay(artifact, hasNext) {
   const previewImg = $('video-artifact-preview');
   if (!overlay || !imgEl || !titleEl || !descEl) return;
 
+  setNativeVideoControlsSuppressed($('chapter-video'), true);
   imgEl.src = artifact.image;
   imgEl.alt = artifact.name;
   titleEl.textContent = artifact.name;
@@ -945,6 +986,7 @@ function hideVideoPuzzleOverlay({ resume = true } = {}) {
   videoPuzzleVisible = false;
   pendingVideoPuzzle = null;
 
+  setNativeVideoControlsSuppressed($('chapter-video'), false);
   const canvasHost = $('video-puzzle-canvas');
   if (canvasHost) canvasHost.innerHTML = '';
   videoMiniPuzzleCanvas = null;
@@ -970,6 +1012,7 @@ function showVideoPuzzleOverlay() {
   if (!overlay) return;
   overlay.style.display = 'grid';
   videoPuzzleVisible = true;
+  setNativeVideoControlsSuppressed($('chapter-video'), true);
 }
 
 function setVideoPuzzleSolvedState(isSolved) {
@@ -1140,6 +1183,9 @@ function openVideoChapter(index) {
   if (videoEl) {
     try {
       disableVideoFullscreen(videoEl);
+      // Keep native controls during normal playback, but we'll suppress them while overlays are open.
+      videoEl.controls = true;
+      videoEl.setAttribute('controls', '');
       videoEl.pause();
       videoEl.src = chapter.video;
       videoEl.load();
