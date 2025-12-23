@@ -504,6 +504,40 @@ function suppressSeekUntilSettled(videoEl, action) {
   }
 }
 
+function disableVideoFullscreen(videoEl) {
+  if (!videoEl) return;
+  if (videoEl.__fullscreenDisabled) return;
+  videoEl.__fullscreenDisabled = true;
+
+  // Keep it inline as much as possible.
+  try {
+    videoEl.setAttribute('playsinline', '');
+    videoEl.setAttribute('webkit-playsinline', '');
+    videoEl.setAttribute('x5-playsinline', '');
+    videoEl.setAttribute('x5-video-player-type', 'h5');
+    videoEl.setAttribute('x5-video-player-fullscreen', 'false');
+    videoEl.setAttribute('controlslist', 'nofullscreen noremoteplayback noplaybackrate');
+  } catch (_) {}
+
+  const exitAnyFullscreen = () => {
+    forceVideoInline(videoEl);
+    try {
+      if (typeof videoEl.webkitExitFullscreen === 'function') {
+        videoEl.webkitExitFullscreen();
+      }
+    } catch (_) {}
+  };
+
+  try {
+    videoEl.addEventListener('webkitbeginfullscreen', exitAnyFullscreen);
+    videoEl.addEventListener('webkitendfullscreen', exitAnyFullscreen);
+  } catch (_) {}
+  try {
+    document.addEventListener('fullscreenchange', exitAnyFullscreen);
+    document.addEventListener('webkitfullscreenchange', exitAnyFullscreen);
+  } catch (_) {}
+}
+
 function showView(id) {
   const views = document.querySelectorAll('[data-view]');
   views.forEach((v) => {
@@ -1105,6 +1139,7 @@ function openVideoChapter(index) {
   const videoEl = $('chapter-video');
   if (videoEl) {
     try {
+      disableVideoFullscreen(videoEl);
       videoEl.pause();
       videoEl.src = chapter.video;
       videoEl.load();

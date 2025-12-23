@@ -689,6 +689,10 @@
       z-index: 1;
       object-fit: contain;
     }
+    /* 尽量禁用浏览器原生全屏按钮（不同内核支持情况不同） */
+    #chapter-video::-webkit-media-controls-fullscreen-button { display: none !important; }
+    #chapter-video::-webkit-media-controls-picture-in-picture-button { display: none !important; }
+    #chapter-video::-webkit-media-controls-playback-rate-button { display: none !important; }
     #video-artifact-overlay {
       position: absolute;
       inset: 0;
@@ -1660,12 +1664,12 @@
           </div>
           <video
             id="chapter-video"
-            controls
             playsinline
             webkit-playsinline
             x5-playsinline
             x5-video-player-type="h5"
             x5-video-player-fullscreen="false"
+            controlslist="nofullscreen noremoteplayback noplaybackrate"
             disablepictureinpicture
           ></video>
           <div id="video-stop-prompt" aria-hidden="true">
