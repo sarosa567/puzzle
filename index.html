@@ -689,6 +689,20 @@
       z-index: 1;
       object-fit: contain;
     }
+    #video-cover {
+      position: absolute;
+      inset: 0;
+      display: none;
+      background: #000;
+      z-index: 2; /* 在视频上方、覆盖层下方 */
+      pointer-events: none;
+    }
+    #video-cover-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
     /* 尽量禁用浏览器原生全屏按钮（不同内核支持情况不同） */
     #chapter-video::-webkit-media-controls-fullscreen-button { display: none !important; }
     #chapter-video::-webkit-media-controls-picture-in-picture-button { display: none !important; }
@@ -1682,6 +1696,9 @@
             controlslist="nofullscreen noremoteplayback noplaybackrate"
             disablepictureinpicture
           ></video>
+          <div id="video-cover" aria-hidden="true">
+            <img id="video-cover-img" alt="" />
+          </div>
           <div id="video-tap-overlay" aria-hidden="true">
             <div class="video-stop-prompt-inner">
               <p class="video-stop-hint-text">点击开始播放</p>

@@ -562,6 +562,7 @@ function setNativeVideoControlsSuppressed(videoEl, suppressed) {
     try {
       videoEl.__savedControls = !!videoEl.controls;
       videoEl.__savedPointerEvents = videoEl.style.pointerEvents || '';
+      videoEl.__savedVisibility = videoEl.style.visibility || '';
     } catch (_) {}
 
     try {
@@ -571,6 +572,10 @@ function setNativeVideoControlsSuppressed(videoEl, suppressed) {
     } catch (_) {}
     try {
       videoEl.style.pointerEvents = 'none';
+    } catch (_) {}
+    try {
+      // Some Android browsers render video in a separate layer above DOM; hiding it avoids overlay "flash then disappear".
+      videoEl.style.visibility = 'hidden';
     } catch (_) {}
   } else {
     try {
@@ -585,9 +590,42 @@ function setNativeVideoControlsSuppressed(videoEl, suppressed) {
       const prevPe = videoEl.__savedPointerEvents;
       videoEl.style.pointerEvents = typeof prevPe === 'string' ? prevPe : '';
     } catch (_) {}
+    try {
+      const prevVis = videoEl.__savedVisibility;
+      videoEl.style.visibility = typeof prevVis === 'string' ? prevVis : '';
+    } catch (_) {}
   }
 
   videoEl.__nativeControlsSuppressed = next;
+}
+
+function showVideoCover(src) {
+  const cover = $('video-cover');
+  if (!cover) return;
+  const img = $('video-cover-img');
+  if (img) {
+    if (src) {
+      img.src = src;
+      img.style.display = '';
+    } else {
+      img.removeAttribute('src');
+      img.style.display = 'none';
+    }
+  }
+  cover.style.display = 'block';
+  cover.setAttribute('aria-hidden', 'false');
+}
+
+function hideVideoCover() {
+  const cover = $('video-cover');
+  if (!cover) return;
+  cover.style.display = 'none';
+  cover.setAttribute('aria-hidden', 'true');
+  const img = $('video-cover-img');
+  if (img) {
+    img.removeAttribute('src');
+    img.style.display = 'none';
+  }
 }
 
 function showView(id) {
@@ -650,6 +688,7 @@ function hideVideoArtifactOverlay() {
   videoOverlayVisible = false;
   document.body.classList.remove('video-artifact-open');
   setNativeVideoControlsSuppressed($('chapter-video'), false);
+  hideVideoCover();
   restoreVideoPlaybackRate($('chapter-video'));
 }
 
@@ -661,6 +700,7 @@ function hideVideoStopPrompt() {
   pendingVideoPuzzle = null;
   setNativeVideoControlsSuppressed($('chapter-video'), false);
   hideVideoTapOverlay();
+  hideVideoCover();
   restoreVideoPlaybackRate($('chapter-video'));
   setVideoStopHintArtifact(null);
 }
@@ -688,6 +728,9 @@ function showVideoStopPrompt(stop) {
     try {
       forceVideoInline(videoEl);
       setNativeVideoControlsSuppressed(videoEl, true);
+      const firstId = Array.isArray(stop.items) ? stop.items[0] : null;
+      const firstArtifact = firstId ? ARTIFACTS_CATALOG[firstId] : null;
+      showVideoCover(firstArtifact && firstArtifact.image ? firstArtifact.image : null);
       suppressSeekUntilSettled(videoEl, () => {
         videoEl.pause();
         if (typeof stop.at === 'number' && Number.isFinite(stop.at)) {
@@ -746,6 +789,7 @@ function showVideoArtifactOverlay(artifact, hasNext) {
   if (!overlay || !imgEl || !titleEl || !descEl) return;
 
   setNativeVideoControlsSuppressed($('chapter-video'), true);
+  showVideoCover(artifact && artifact.image ? artifact.image : null);
   imgEl.src = artifact.image;
   imgEl.alt = artifact.name;
   titleEl.textContent = artifact.name;
@@ -1026,6 +1070,7 @@ function hideVideoPuzzleOverlay({ resume = true } = {}) {
   pendingVideoPuzzle = null;
 
   setNativeVideoControlsSuppressed($('chapter-video'), false);
+  hideVideoCover();
   const canvasHost = $('video-puzzle-canvas');
   if (canvasHost) canvasHost.innerHTML = '';
   videoMiniPuzzleCanvas = null;
@@ -1052,6 +1097,7 @@ function showVideoPuzzleOverlay() {
   overlay.style.display = 'grid';
   videoPuzzleVisible = true;
   setNativeVideoControlsSuppressed($('chapter-video'), true);
+  showVideoCover(videoMiniPuzzleImageSrc || null);
 }
 
 function setVideoPuzzleSolvedState(isSolved) {
