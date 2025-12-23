@@ -312,6 +312,7 @@ function openVideoArtifactAtStop(stop) {
 
   // 进入器具弹窗必须暂停
   try {
+    forceVideoInline(videoEl);
     videoEl.pause();
     suppressSeekHandler = true;
     if (typeof stop.at === 'number' && Number.isFinite(stop.at)) {
@@ -456,6 +457,25 @@ function buildLevelsFromJson(json) {
 
 function $(id) { return document.getElementById(id); }
 
+function forceVideoInline(videoEl) {
+  if (!videoEl) return;
+  // iOS Safari/WKWebView: ensure the video leaves native fullscreen so DOM overlays can show.
+  try {
+    if (videoEl.webkitSupportsPresentationMode && typeof videoEl.webkitSetPresentationMode === 'function') {
+      const mode = videoEl.webkitPresentationMode;
+      if (mode && mode !== 'inline') {
+        videoEl.webkitSetPresentationMode('inline');
+      }
+    }
+  } catch (_) {}
+  // Standard fullscreen API (some Android browsers).
+  try {
+    if (document.fullscreenElement && typeof document.exitFullscreen === 'function') {
+      document.exitFullscreen().catch(() => {});
+    }
+  } catch (_) {}
+}
+
 function showView(id) {
   const views = document.querySelectorAll('[data-view]');
   views.forEach((v) => {
@@ -548,6 +568,7 @@ function showVideoStopPrompt(stop) {
   const videoEl = $('chapter-video');
   if (videoEl) {
     try {
+      forceVideoInline(videoEl);
       videoEl.pause();
       suppressSeekHandler = true;
       if (typeof stop.at === 'number' && Number.isFinite(stop.at)) {
