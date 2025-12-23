@@ -836,8 +836,18 @@ function openMiniPuzzleFromArtifactModal() {
 
 function teardownVideoStopLogic(videoEl) {
   if (!videoEl) return;
-  if (activeVideoTimeHandler) videoEl.removeEventListener('timeupdate', activeVideoTimeHandler);
-  if (activeVideoSeekHandler) videoEl.removeEventListener('seeking', activeVideoSeekHandler);
+  if (activeVideoTimeHandler) {
+    videoEl.removeEventListener('timeupdate', activeVideoTimeHandler);
+    videoEl.removeEventListener('durationchange', activeVideoTimeHandler);
+    videoEl.removeEventListener('loadeddata', activeVideoTimeHandler);
+    videoEl.removeEventListener('canplay', activeVideoTimeHandler);
+    videoEl.removeEventListener('playing', activeVideoTimeHandler);
+    videoEl.removeEventListener('pause', activeVideoTimeHandler);
+  }
+  if (activeVideoSeekHandler) {
+    videoEl.removeEventListener('seeking', activeVideoSeekHandler);
+    videoEl.removeEventListener('seeked', activeVideoSeekHandler);
+  }
   if (activeVideoPollerId) clearInterval(activeVideoPollerId);
   activeVideoTimeHandler = null;
   activeVideoSeekHandler = null;
@@ -864,8 +874,12 @@ function setupVideoStopLogic(videoEl, videoId) {
     if (!activeVideoId || videoOverlayVisible || videoPromptVisible || videoPuzzleVisible) return;
     if (!stops.length) return;
 
-    // 元数据未就绪时可能拿不到 duration，先不触发
-    if (!Number.isFinite(videoEl.duration) || videoEl.duration <= 0) return;
+    // 某些浏览器（尤其部分 Android 内核）在用户交互/开始播放前拿不到 duration（NaN）。
+    // 这里不强依赖 duration：能用 currentTime 命中停点就触发。
+    const duration =
+      typeof videoEl.duration === 'number' && Number.isFinite(videoEl.duration) && videoEl.duration > 0
+        ? videoEl.duration
+        : null;
 
     // 跳过未配置秒数的停点
     while (activeVideoStopIndex < stops.length && stops[activeVideoStopIndex].at == null) {
@@ -876,7 +890,7 @@ function setupVideoStopLogic(videoEl, videoId) {
     const stop = stops[activeVideoStopIndex];
     if (stop.at == null) return;
     // 超出视频时长的停点直接跳过，避免“永远触发不到”
-    if (stop.at > videoEl.duration) {
+    if (duration != null && stop.at > duration) {
       activeVideoStopIndex += 1;
       return;
     }
@@ -905,11 +919,19 @@ function setupVideoStopLogic(videoEl, videoId) {
 
   videoEl.addEventListener('timeupdate', activeVideoTimeHandler);
   videoEl.addEventListener('seeking', activeVideoSeekHandler);
+  // 部分内核 timeupdate / loadedmetadata 不稳定，额外监听一些“更容易触发”的事件
+  try {
+    videoEl.addEventListener('seeked', activeVideoSeekHandler);
+    videoEl.addEventListener('durationchange', activeVideoTimeHandler);
+    videoEl.addEventListener('loadeddata', activeVideoTimeHandler);
+    videoEl.addEventListener('canplay', activeVideoTimeHandler);
+    videoEl.addEventListener('playing', activeVideoTimeHandler);
+    videoEl.addEventListener('pause', activeVideoTimeHandler);
+  } catch (_) {}
 
   // 兜底：部分环境 timeupdate 触发不稳定，用轮询保证能触发停点
   activeVideoPollerId = setInterval(() => {
-    // 仅在播放中轮询，减少无意义计算
-    if (videoEl.paused || videoEl.ended) return;
+    if (videoEl.ended) return;
     maybeTrigger();
   }, 120);
 
