@@ -728,9 +728,9 @@ function showVideoStopPrompt(stop) {
     try {
       forceVideoInline(videoEl);
       setNativeVideoControlsSuppressed(videoEl, true);
-      const firstId = Array.isArray(stop.items) ? stop.items[0] : null;
-      const firstArtifact = firstId ? ARTIFACTS_CATALOG[firstId] : null;
-      showVideoCover(firstArtifact && firstArtifact.image ? firstArtifact.image : null);
+      // Android 部分内核下视频层会压过 DOM：这里通过隐藏 video（setNativeVideoControlsSuppressed）
+      // 来保证提示/器具卡片能稳定显示；不再额外铺一张器具图，避免“多余图片”贴近文字背景。
+      showVideoCover(null);
       suppressSeekUntilSettled(videoEl, () => {
         videoEl.pause();
         if (typeof stop.at === 'number' && Number.isFinite(stop.at)) {
@@ -789,7 +789,7 @@ function showVideoArtifactOverlay(artifact, hasNext) {
   if (!overlay || !imgEl || !titleEl || !descEl) return;
 
   setNativeVideoControlsSuppressed($('chapter-video'), true);
-  showVideoCover(artifact && artifact.image ? artifact.image : null);
+  showVideoCover(null);
   imgEl.src = artifact.image;
   imgEl.alt = artifact.name;
   titleEl.textContent = artifact.name;
