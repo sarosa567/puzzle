@@ -1,5 +1,4 @@
 // 木兰辞原文与旁白数据（由 mulan_expanded.json 转换而来）
-// 供 mulan_app.js 在浏览器本地直接使用，避免 file:// 环境下 fetch 受限。
 
 window.MULAN_EXPANDED = {
   "第1节": {

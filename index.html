@@ -44,6 +44,14 @@
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
     }
+    /* 全屏页（首页/四段章节/视频）：去掉 #app padding，避免出现“无溢出但有滚动条” */
+    body.fullscreen {
+      overflow: hidden;
+    }
+    body.fullscreen #app {
+      max-width: none;
+      padding: 0;
+    }
     #app {
       max-width: 900px;
       margin: 0 auto;
@@ -289,6 +297,926 @@
       background-position: center top;
       background-repeat: no-repeat;
       background-attachment: fixed;
+    }
+
+    /* 四段视频章节封面 */
+    section[data-view="segments"] {
+      margin-top: 0;
+      padding: 0;
+      border-radius: 0;
+      box-shadow: none;
+      min-height: 100vh;
+      background-image: url('image/u-bg.png');
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+    .segments-stage {
+      min-height: 100vh;
+      width: 100%;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .segments-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      background: rgba(43, 30, 30, 0.92);
+      color: #f7ede3;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    }
+    .segments-header strong {
+      font-family: "SimSun", "Songti SC", "宋体", serif;
+      font-size: 16px;
+      letter-spacing: 0.08em;
+    }
+    .segments-sub {
+      padding: 12px 12px 0;
+      text-align: center;
+      color: rgba(40, 25, 25, 0.78);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      font-family: "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont,
+        "Segoe UI", system-ui, sans-serif;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+    }
+    .segments-hanging-row {
+      position: relative;
+      width: 100%;
+      flex: 1;
+      padding: 18px 14px 44px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 26px 18px;
+      max-width: 980px;
+      margin: 0 auto;
+      justify-items: center;
+      align-content: center; /* 垂直居中在可用空间内 */
+      justify-content: center;
+    }
+    .segment-circle-btn {
+      width: min(420px, 44vw);
+      height: min(120px, 18vh);
+      border-radius: 0;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      background-image: none;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: transparent;
+      box-shadow: none;
+      color: inherit;
+      font-size: 22px;
+      line-height: 1.2;
+      letter-spacing: 0.06em;
+      font-family: "SimSun", "Songti SC", "宋体", serif;
+      text-shadow: none;
+      display: grid;
+      place-items: center;
+      transition: transform 160ms ease;
+      user-select: none;
+    }
+    .segment-circle-btn.odd {
+      background-image: url('image/odd.png');
+      justify-self: start;
+    }
+    .segment-circle-btn.even {
+      background-image: url('image/odd.png');
+      justify-self: end;
+    }
+    .segment-circle-btn:hover {
+      transform: translateY(-1px);
+    }
+    .segment-circle-btn:active {
+      transform: translateY(0);
+    }
+    .segment-title-text {
+      display: block;
+      width: 86%;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color:white;
+    }
+    @media (max-width: 420px) {
+      .segments-hanging-row { grid-template-columns: 1fr; }
+      .segment-circle-btn {
+        width: min(520px, 92vw);
+        height: min(120px, 20vh);
+      }
+    }
+    /* 横屏：背景更大、字号更小（章节选择页） */
+    @media (orientation: landscape) {
+      section[data-view="segments"] .segments-hanging-row {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        max-width: 1200px;
+        padding: 10px 18px 18px;
+        gap: 14px 16px;
+      }
+      section[data-view="segments"] .segment-circle-btn {
+        width: min(360px, 22vw);
+        height: min(170px, 34vh);
+        font-size: 18px;
+        letter-spacing: 0.04em;
+      }
+      section[data-view="segments"] .segment-title-text {
+        width: 90%;
+      }
+    }
+    /* 横屏：整站适配（不强制横屏，仅优化布局） */
+    @media (orientation: landscape) {
+      /* 首页：横屏采用网格布局，确保无须纵向滚动即可完整展示 */
+      section[data-view="home"] .home-hero-inner {
+        transform: none;
+        height: 100vh;
+        min-height: 100vh;
+        overflow: hidden;
+        display: grid !important;
+        grid-template-columns: 46% 54%;
+        grid-template-rows: auto auto;
+        grid-template-areas:
+          "cover title"
+          "cover actions";
+        align-content: center;
+        justify-items: center;
+        gap: 12px 14px;
+        padding: 12px 18px;
+      }
+      section[data-view="home"] .home-title-block {
+        grid-area: title;
+        align-self: end;
+      }
+      section[data-view="home"] #btn-start {
+        grid-area: cover;
+        width: 92%;
+        max-width: 52vh;
+        align-self: center;
+      }
+      section[data-view="home"] #home-main-title { font-size: 52px; }
+      section[data-view="home"] #home-subtitle { font-size: 15px; }
+      section[data-view="home"] .home-toggle-row {
+        grid-area: actions;
+        align-self: start;
+        flex-direction: row;
+        gap: 12px;
+        margin-top: 6px;
+      }
+
+      /* 章节地图：节点略小，横屏视野更舒适 */
+      section[data-view="chapters"] .chapter-node {
+        width: 34px;
+        height: 34px;
+        font-size: 12px;
+      }
+
+      /* 拼图页：主画面与“前章余韵”并排，避免纵向挤压 */
+      section[data-view="puzzle"] .puzzle-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 340px;
+        grid-template-rows: auto 1fr;
+        grid-template-areas:
+          "header header"
+          "main poem";
+        align-items: start;
+        gap: 8px 10px;
+        padding: 6px 10px 10px;
+      }
+      section[data-view="puzzle"] .puzzle-header-line { grid-area: header; margin-bottom: 0; }
+      section[data-view="puzzle"] .puzzle-main-area {
+        grid-area: main;
+        padding-bottom: 18px;
+        margin-top: 0;
+      }
+      section[data-view="puzzle"] .puzzle-poem-card {
+        grid-area: poem;
+        width: 100%;
+        max-width: none;
+        margin: 0;
+      }
+      section[data-view="puzzle"] #puzzle-canvas { width: 96%; max-width: 920px; }
+      section[data-view="puzzle"] .puzzle-main-area .btn-hint-wrapper { bottom: 12px; }
+
+      /* 完成页：图文并排 */
+      section[data-view="success"] .success-layout {
+        flex-direction: row;
+        gap: 14px;
+        align-items: flex-start;
+      }
+      section[data-view="success"] .success-image-wrapper {
+        flex: 0 0 42%;
+        max-width: 520px;
+      }
+      section[data-view="success"] .success-text { flex: 1; }
+    }
+
+    /* 视频播放页 */
+    section[data-view="video"] {
+      margin-top: 0;
+      padding: 0;
+      border-radius: 0;
+      box-shadow: none;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #2a1a1a 0, #140d0d 60%, #0d0707 100%);
+    }
+    .video-stage {
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .video-player-wrap {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+    .video-bgm-btn {
+      width: 32px;
+      height: 32px;
+      border: none;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      color: #f7ede3;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+    }
+    .video-bgm-btn:hover { background: rgba(255,255,255,0.18); }
+    .video-bgm-btn svg { width: 18px; height: 18px; }
+    .video-bgm-btn.off {
+      opacity: 0.35;
+      background: rgba(255,255,255,0.06);
+      filter: grayscale(1);
+    }
+    .video-bgm-btn.off svg { opacity: 0.85; }
+    .video-bgm-btn.off::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 2px;
+      background: rgba(255, 90, 90, 0.95);
+      transform: rotate(-35deg);
+      border-radius: 999px;
+      box-shadow: 0 0 10px rgba(255, 90, 90, 0.35);
+      pointer-events: none;
+    }
+    .video-float-btn {
+      position: absolute;
+      top: 12px;
+      z-index: 6;
+    }
+    /* 左上角留给喇叭按钮；返回章节下移避免重叠 */
+    #btn-video-bgm.video-float-btn { left: 12px; right: auto; }
+    #btn-video-back.video-float-btn { left: 12px; top: 52px; }
+    #btn-video-nav.video-float-btn { right: 54px; }
+    .video-nav-btn {
+      position: relative;
+      width: 32px;
+      height: 32px;
+      border: none;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      color: #f7ede3;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      padding: 0;
+      overflow: hidden;
+    }
+    .video-nav-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url('image/map.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 0.92;
+      pointer-events: none;
+    }
+    .video-nav-btn > span {
+      position: relative;
+      z-index: 1;
+      color: rgba(255,255,255,0.92);
+      text-shadow: 0 2px 10px rgba(0,0,0,0.55);
+    }
+    .video-nav-btn:hover { background: rgba(255,255,255,0.18); }
+    #video-nav-panel {
+      position: absolute;
+      right: 12px;
+      top: 54px;
+      z-index: 6;
+      display: none;
+      width: min(240px, 70vw);
+      background: rgba(15, 9, 9, 0.78);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 14px;
+      box-shadow: 0 18px 46px rgba(0,0,0,0.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .video-nav-mini {
+      padding: 10px 10px;
+      display: grid;
+      grid-template-columns: 40px 1fr 40px;
+      gap: 8px;
+      align-items: center;
+    }
+    .video-nav-mini-btn {
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.92);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+    }
+    .video-nav-mini-btn:hover { background: rgba(255,255,255,0.16); }
+    #video-nav-label {
+      min-width: 0;
+      color: rgba(255,255,255,0.92);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      line-height: 1.3;
+      text-align: center;
+      font-family: "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont,
+        "Segoe UI", system-ui, sans-serif;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .video-back-btn {
+      height: 32px;
+      padding: 0 10px;
+      border: none;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      color: #f7ede3;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+    }
+    .video-back-btn:hover { background: rgba(255,255,255,0.18); }
+    #chapter-video {
+      position: absolute;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      max-width: 100vw;
+      max-height: 100vh;
+      border-radius: 0;
+      background: #000;
+      box-shadow: none;
+      z-index: 1;
+      object-fit: contain;
+    }
+    #video-artifact-overlay {
+      position: absolute;
+      inset: 0;
+      display: none;
+      place-items: stretch;
+      /* 介绍页不再使用整屏遮罩背景 */
+      background: transparent;
+      padding: 0;
+      z-index: 5;
+      --toolpanel-w: min(420px, 44vw);
+    }
+    /* 器具介绍打开时，隐藏视频页返回按钮避免重叠 */
+    body.video-artifact-open #btn-video-back { display: none !important; }
+    /* 器具介绍打开时，隐藏喇叭按钮（与左上角返回互斥） */
+    body.video-artifact-open #btn-video-bgm { display: none !important; }
+    /* 视频停点提示：引导用户点击再打开器具介绍（避免突兀打断） */
+    #video-stop-prompt {
+      position: absolute;
+      inset: 0;
+      display: none;
+      place-items: center;
+      background: rgba(0,0,0,0.20);
+      padding: 18px 12px;
+      z-index: 4; /* 在视频上方、器具卡片下方 */
+    }
+    .video-stop-prompt-inner {
+      display: grid;
+      place-items: center;
+      gap: 12px;
+      text-align: center;
+      color: rgba(255,255,255,0.92);
+    }
+    .video-stop-hint-wrapper {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .video-stop-hint-effect {
+      width: min(520px, 86vw);
+      height: auto;
+      max-height: 42vh;
+      object-fit: contain;
+      pointer-events: none;
+      filter: drop-shadow(0 18px 40px rgba(0,0,0,0.55));
+    }
+    .video-stop-hint-artifact {
+      position: absolute;
+      width: min(42%, 190px);
+      aspect-ratio: 1 / 1;
+      border-radius: 999px;
+      object-fit: contain;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.5);
+      display: none;
+      pointer-events: none;
+    }
+    .video-stop-hint-text {
+      margin: 0;
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      text-shadow: 0 8px 22px rgba(0,0,0,0.65);
+      font-family: "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont,
+        "Segoe UI", system-ui, sans-serif;
+    }
+    .video-stop-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* 视频内拼图小游戏（全屏覆盖） */
+    #video-puzzle-overlay {
+      position: absolute;
+      inset: 0;
+      display: none;
+      place-items: stretch;
+      background: rgba(0,0,0,0.58);
+      padding: 0;
+      z-index: 7; /* 高于提示与器具卡片 */
+    }
+    .video-puzzle-panel {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .video-puzzle-stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #video-puzzle-canvas {
+      width: min(88vmin, 92vw, 92vh);
+      height: min(88vmin, 92vw, 92vh);
+      min-height: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(20, 12, 12, 0.72);
+      box-shadow: 0 18px 60px rgba(0,0,0,0.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    #video-puzzle-success {
+      position: absolute;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 10px;
+    }
+    .video-puzzle-float-home {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 2;
+    }
+    .video-puzzle-float-right {
+      position: absolute;
+      top: 50%;
+      right: 14px;
+      transform: translateY(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-end;
+    }
+    /* 拼图完成态：避免成功图层与画布/文案叠加 */
+    .video-puzzle-panel.is-solved #video-puzzle-canvas {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .video-puzzle-panel.is-solved #btn-video-puzzle-hint {
+      display: none !important;
+    }
+    .video-puzzle-success-card {
+      width: min(920px, 92vw);
+      display: grid;
+      grid-template-columns: minmax(180px, 260px) 1fr;
+      gap: 12px;
+      align-items: center;
+      color: rgba(255,255,255,0.92);
+      padding: 12px;
+      border-radius: 16px;
+      background: rgba(0,0,0,0.22);
+      box-shadow: 0 18px 55px rgba(0,0,0,0.55);
+    }
+    .video-puzzle-success-img {
+      width: 100%;
+      height: auto;
+      max-height: 52vh;
+      object-fit: contain;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.04);
+    }
+    .video-puzzle-success-text h3 {
+      margin: 0 0 6px;
+      font-size: 18px;
+      letter-spacing: 0.08em;
+      font-family: "SimSun", "Songti SC", "宋体", serif;
+    }
+    .video-puzzle-success-text p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.82);
+      font-family: "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont,
+        "Segoe UI", system-ui, sans-serif;
+    }
+    @media (max-width: 860px) {
+      .video-puzzle-success-card { grid-template-columns: 1fr; }
+      .video-puzzle-float-right { right: 10px; }
+      .video-puzzle-float-home { left: 10px; }
+    }
+    .video-artifact-card {
+      width: 100vw;
+      height: 100vh;
+      display: block;
+      color: #fff;
+      background: transparent;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      max-height: none;
+      overflow: hidden;
+      position: relative;
+    }
+    .video-artifact-return-float {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 6;
+      height: 36px;
+      padding: 0 12px;
+      border: none;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.92);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+    }
+    .video-artifact-return-float:hover { background: rgba(255,255,255,0.20); }
+    .video-artifact-close-float {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 6;
+      width: 36px;
+      height: 36px;
+      border: none;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.92);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      line-height: 1;
+    }
+    .video-artifact-close-float:hover { background: rgba(255,255,255,0.20); }
+    .video-artifact-pages {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      padding: 0;
+    }
+    /* 避免横向滚动条（Safari/某些浏览器会因为 200% track 出现误差） */
+    .video-artifact-pages-track { overflow: hidden; }
+    .video-artifact-pages-track {
+      width: 200%;
+      height: 100%;
+      display: flex;
+      transform: translateX(0%);
+      transition: transform 220ms ease;
+    }
+    .video-artifact-page {
+      /* 2 页滑动：每页占 track 的一半（=视口宽度） */
+      flex: 0 0 50%;
+      height: 100%;
+      padding: 0;
+      display: block;
+      position: relative;
+      overflow: hidden;
+    }
+    /* 器具介绍：第 1 页（左图 + CTA / 右文字） */
+    .video-artifact-intro {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5%;
+      /* 使用视口比例，避免百分比 padding(按宽度计算) 导致高度不稳定/溢出 */
+      padding: 8vh 2vw 6vh 6vw; /* 整体水平右移，给左侧留空 */
+      box-sizing: border-box;
+      overflow: visible; /* 允许右侧背景铺满到 100vh */
+    }
+    .video-tool-left {
+      position: relative;
+      /* 器具图更窄，给右侧文字更多空间 */
+      flex: 0 0 36%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+    .video-tool-image-card {
+      max-width: 20vw;
+      min-width: 10vw;
+      width: auto;
+      height: 78%;
+      margin: 0;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.10);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 3%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      margin-left: 0;
+      transform: rotate(-30deg);
+      transform-origin: center;
+    }
+    .video-tool-img {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 12px;
+      background: rgba(0,0,0,0.10);
+      box-shadow: 0 0 0 2px rgba(255,255,255,0.06) inset;
+      margin: 0 auto;
+    }
+    .video-tool-cta {
+      position: absolute;
+      left: 0;
+      bottom: 6vh; /* 垂直上移 CTA（保持 vh 逻辑） */
+      width: 24%;
+      padding: 0;
+      z-index: 2;
+    }
+    .video-tool-cta-btn {
+      border: none;
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 14px 26px rgba(0,0,0,0.55));
+    }
+    .video-tool-cta-btn img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+    .video-tool-cta-btn:hover { transform: translateY(-1px); }
+
+    /* 右侧文字面板（toolbg 上放文字 + 倒三角） */
+    .video-tooltext-panel {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+      /* toolbg 内留白，避免文字“顶到边/溢出”，底部留更多空间 */
+      padding:6vh 13vw 21vh;
+      min-width: 0;
+      box-sizing: border-box;
+      flex: 1 1 auto;
+      overflow: visible; /* 让背景可超出本元素高度（由 ::before 承担） */
+    }
+    /* 右侧文字背景：强制铺满 100vh，不影响左侧布局 */
+    .video-tooltext-panel::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: calc(-8vh);
+      bottom: calc(-6vh);
+      background-image: url('image/toolbg.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 100% 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .video-tooltext-panel > * {
+      position: relative;
+      z-index: 1;
+    }
+    .video-tool-text {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow: auto;
+      padding-right: 6px;
+      color: rgba(255,255,255,0.92);
+      text-shadow: 0 10px 26px rgba(0,0,0,0.5);
+      font-family: "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont,
+        "Segoe UI", system-ui, sans-serif;
+      /* 背景由父级 ::before 提供，这里只负责滚动区域 */
+      max-height: 100%;
+    }
+    .video-tool-title {
+      margin: 0 0 8px;
+      font-size: 18px;
+      letter-spacing: 0.08em;
+      font-family: "SimSun", "Songti SC", "宋体", serif;
+    }
+    .video-tool-desc {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.85;
+      white-space: pre-line;
+    }
+    .video-tool-scroll-btn {
+      align-self: center;
+      width: 44px;
+      height: 32px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      display: none;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,0.55));
+    }
+    .video-tool-scroll-btn::before {
+      content: "";
+      display: block;
+      width: 0;
+      height: 0;
+      margin: 0 auto;
+      border-left: 14px solid transparent;
+      border-right: 14px solid transparent;
+      border-top: 16px solid rgba(255,255,255,0.85);
+      opacity: 0.92;
+    }
+    .video-tool-scroll-btn:hover::before { border-top-color: rgba(255,255,255,0.98); }
+    .video-tool-scroll-btn:active { transform: translateY(1px); }
+    .video-artifact-page.right {
+      display: flex;
+      position: relative;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.22);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .video-artifact-preview {
+      width: auto;
+      height: 100vh;
+      max-width: 100vw;
+      max-height: 100vh;
+      display: block;
+      margin: 0 auto;
+      object-fit: contain;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      cursor: pointer;
+    }
+    .video-artifact-page.right .video-artifact-actions {
+      position: absolute;
+      bottom: 15vh;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-top: 0;
+      justify-content: center;
+      pointer-events: auto;
+      writing-mode: horizontal-tb;
+      text-orientation: mixed;
+    }
+    .video-artifact-preview-glow {
+      box-shadow:
+        0 0 0 2px rgba(255,255,255,0.10) inset,
+        0 0 18px rgba(255, 180, 120, 0.35),
+        0 0 40px rgba(255, 120, 120, 0.22);
+      animation: pulseGlow 1.6s ease-in-out infinite;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.12); }
+    }
+    .video-artifact-preview-title {
+      margin: 0 0 6px;
+      font-size: 18px;
+      letter-spacing: 0.08em;
+      font-family: "SimSun", "Songti SC", "宋体", serif;
+    }
+    .video-artifact-preview-sub {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.82);
+      font-family: "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont,
+        "Segoe UI", system-ui, sans-serif;
+    }
+    .video-artifact-actions {
+      margin-top: 14px;
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      flex: 0 0 auto;
+      flex-wrap: wrap;
+    }
+    .video-artifact-img {
+      width: 100%;
+      height: auto;
+      max-height: 42vh;
+      object-fit: contain;
+      background: transparent;
+    }
+    .video-artifact-title {
+      margin: 0 0 8px;
+      font-size: 20px;
+      letter-spacing: 0.08em;
+      font-family: "SimSun", "Songti SC", "宋体", serif;
+    }
+    .video-artifact-desc {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.8;
+      white-space: pre-line;
+      overflow: auto;
+      max-height: 46vh;
+      padding-right: 6px;
+      font-family: "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont,
+        "Segoe UI", system-ui, sans-serif;
+    }
+    @media (max-width: 680px) {
+      .video-artifact-card { grid-template-columns: 1fr; }
+      .video-artifact-actions { justify-content: center; }
+      .video-artifact-img { max-height: 28vh; }
+      .video-artifact-desc { max-height: 32vh; }
+      #video-artifact-overlay { --toolpanel-w: min(420px, 72vw); }
+      .video-artifact-intro {
+        flex-direction: column;
+        padding: 14% 4% 4%;
+        align-items: stretch;
+      }
+      .video-tool-left { flex: 0 0 auto; height: 44%; }
+      .video-tool-image-card { height: 100%; }
+      .video-tool-cta { width: 42%; }
+      .video-tooltext-panel { height: 56%; }
     }
     .chapter-back-node {
       background: #f7efe2;
@@ -689,11 +1617,134 @@
       </div>
     </section>
 
+    <!-- 四段章节（视频入口） -->
+    <section class="view-section" data-view="segments">
+      <div class="segments-stage">
+        <div class="segments-header">
+          <button id="btn-segments-home" class="btn secondary" style="padding-inline:10px; font-size:12px;">
+            返回封面
+          </button>
+          <strong>章节选择</strong>
+          <!-- <button id="btn-segments-puzzle" class="btn secondary" style="padding-inline:10px; font-size:12px;">
+            拼图模式
+          </button> -->
+        </div>
+        <div class="segments-sub">点击章牌播放视频</div>
+        <div id="segments-list" class="segments-hanging-row"></div>
+      </div>
+    </section>
+
+    <!-- 视频播放页 -->
+    <section class="view-section" data-view="video">
+      <div class="video-stage">
+        <div class="video-player-wrap">
+          <button id="btn-video-back" class="video-float-btn video-back-btn" type="button" aria-label="返回章节" title="返回章节">
+            ← 返回
+          </button>
+          <button id="btn-video-nav" class="video-float-btn video-nav-btn" type="button" aria-label="点位导航" title="点位导航">
+            <span>点</span>
+          </button>
+          <button id="btn-video-bgm" class="video-float-btn video-bgm-btn" type="button" aria-label="背景音乐开关" title="背景音乐">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M11 5L6 9H3v6h3l5 4V5z" fill="currentColor"/>
+              <path d="M15 9.5c.8.8 1.2 1.8 1.2 2.8S15.8 14.3 15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M17.8 7.2c1.6 1.6 2.4 3.2 2.4 5.1s-.8 3.6-2.4 5.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="video-nav-panel" aria-hidden="true">
+            <div class="video-nav-mini">
+              <button id="btn-video-nav-prev" class="video-nav-mini-btn" type="button" aria-label="上一个点位">‹</button>
+              <div id="video-nav-label">暂无点位</div>
+              <button id="btn-video-nav-next" class="video-nav-mini-btn" type="button" aria-label="下一个点位">›</button>
+            </div>
+          </div>
+          <video id="chapter-video" controls playsinline webkit-playsinline></video>
+          <div id="video-stop-prompt" aria-hidden="true">
+            <div class="video-stop-prompt-inner">
+              <div class="video-stop-hint-wrapper">
+                <img id="video-stop-hint-effect" class="video-stop-hint-effect" src="image/video_hint.gif" alt="" />
+                <img id="video-stop-hint-artifact" class="video-stop-hint-artifact" alt="器具预览" />
+              </div>
+              <p class="video-stop-hint-text">发现器具介绍，点击打开或忽略继续观看</p>
+              <div class="video-stop-actions">
+                <button id="btn-video-stop-open" class="btn">打开介绍</button>
+                <button id="btn-video-stop-puzzle" class="btn" style="display:none;">玩拼图</button>
+                <button id="btn-video-stop-ignore" class="btn secondary">继续观看</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="video-puzzle-overlay" aria-hidden="true">
+            <div class="video-puzzle-panel">
+              <button id="btn-video-puzzle-home" class="btn secondary video-puzzle-float-home" type="button" aria-label="返回首页">
+                返回首页
+              </button>
+              <div class="video-puzzle-float-right" aria-label="拼图操作">
+                <button id="btn-video-puzzle-hint" class="btn secondary" type="button">提示</button>
+                <button id="btn-video-puzzle-close" class="btn secondary" type="button">退出拼图</button>
+              </div>
+              <div class="video-puzzle-stage">
+                <div id="video-puzzle-canvas"></div>
+                <div id="video-puzzle-success">
+                  <div class="video-puzzle-success-card">
+                    <img id="video-puzzle-success-img" class="video-puzzle-success-img" alt="拼图原图" />
+                    <div class="video-puzzle-success-text">
+                      <h3>完成啦</h3>
+                      <p>点击右侧“退出拼图”回到视频。</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="video-artifact-overlay" aria-hidden="true">
+            <button id="btn-video-artifact-return" class="video-artifact-return-float" type="button" aria-label="返回">← 返回</button>
+            <button id="btn-video-artifact-close" class="video-artifact-close-float" type="button" aria-label="关闭">×</button>
+            <div class="video-artifact-card">
+              <div class="video-artifact-pages">
+                <div id="video-artifact-pages-track" class="video-artifact-pages-track">
+                  <!-- 第 1 页：器具介绍 -->
+                  <div class="video-artifact-page left">
+                    <div class="video-artifact-intro">
+                      <div class="video-tool-left" aria-label="器具图片与入口">
+                        <div class="video-tool-image-card">
+                          <img id="video-artifact-img" class="video-tool-img" alt="器具图片" />
+                        </div>
+                        <div class="video-tool-cta">
+                          <button id="btn-video-artifact-cta" class="video-tool-cta-btn" type="button" aria-label="去拼图预览">
+                            <img src="image/cta.png" alt="开始拼图" />
+                          </button>
+                        </div>
+                      </div>
+                      <div class="video-tooltext-panel" aria-label="器具文字介绍">
+                        <div id="video-tool-text" class="video-tool-text">
+                          <h3 id="video-artifact-title" class="video-tool-title">器具</h3>
+                          <p id="video-artifact-desc" class="video-tool-desc"></p>
+                        </div>
+                        <button id="btn-video-tool-scroll" class="video-tool-scroll-btn" type="button" aria-label="下滑查看更多"></button>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 第 2 页：拼图原图预览（引导用户去玩拼图） -->
+                  <div class="video-artifact-page right">
+                    <img id="video-artifact-preview" class="video-artifact-preview video-artifact-preview-glow" alt="拼图原图预览" />
+                    <div class="video-artifact-actions">
+                      <button id="btn-video-artifact-play-puzzle" class="btn">开始拼图</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- 章节列表（曲线地图） -->
     <section class="view-section" data-view="chapters">
       <div class="puzzle-header-line" style="margin-bottom: 4px;">
         <button id="btn-chapters-home" class="btn secondary" style="padding-inline:10px; font-size:12px;">
-          返回首页
+          返回章节
         </button>
         <strong>章节选择</strong>
         <span id="progress-text" class="chapter-progress">已解锁章节：1 / 31</span>

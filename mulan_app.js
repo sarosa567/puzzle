@@ -59,36 +59,47 @@ const ARTIFACTS_CATALOG = {
   artifact9: {
     id: 'artifact9',
     name: '环首刀',
-    image: 'image/9.jpg',
-    description: '环首刀又称汉刀、环头刀，是一种以手持为主的短兵器，特点是单面开锋，厚脊薄刃，直脊直刃，刀柄首呈圆环形。 环首刀是当时世界上非常先进、杀伤力极强的近身冷兵器，在人类历史上具有非凡意义。环首刀由汉剑演化而来。剑利于突刺，不利于劈砍，不适合骑兵作战。于是汉朝人将剑改为单面开刃、厚脊等结构。刀柄处的圆环可以拴绳子作战时把绳子绕在手上，可以避免刀在手中脱落。'
+    image: 'artifacts_tools/3-16-环首刀.png',
+    description: '环首刀又称汉刀、环头刀，是一种以手持为主的短兵器，特点是单面开锋，厚脊薄刃，直脊直刃，刀柄首呈圆环形。环首刀是当时世界上非常先进、杀伤力极强的近身冷兵器，在人类历史上具有非凡意义。环首刀由汉剑演化而来。剑利于突刺，不利于劈砍，不适合骑兵作战。于是汉朝人将剑改为单面开刃、厚脊等结构。刀柄处的圆环可以拴绳子，作战时把绳子绕在手上，可以避免刀在手中脱落。'
   },
   artifact10: {
     id: 'artifact10',
-    name: '床弩',
-    image: 'image/10.jpg',
+    name: '大型弩',
+    image: 'artifacts_tools/3-18-大型弩.png',
     description: '中国古代一种威力较大的弩。将一张或几张弓安装在床架上，以绞动其后部的轮轴张弓装箭，待机发射。多弓床弩可用多人绞轴，用几张弓的合力发箭，其弹射力远远超过单人使用的擘张、蹶张或腰引弩。'
   },
   artifact15: {
     id: 'artifact15',
     name: '长弓',
-    image: 'image/15.jpg',
-    description: '长弓是源自威尔士的单体木制远程武器，一般长1.5米左右，个别的长达1.8—2米，以紫杉木（性能最优）为主要原料，辅以榆木、白蜡木（性能次之）等替代材料。制作需经过木料筛选、驯弓流程及拳高设定工艺，弓弦采用羊肠或筋鞣制，弓背经亚麻籽油防潮处理。使用该武器需具备45-55公斤拉力，14-15世纪成为英军主力装备。'
+    image: 'artifacts_tools/3-17-长弓.png',
+    description: '长弓是源自威尔士的单体木制远程武器，一般长1.5米左右，个别的长达1.8-2米，以紫杉木（性能最优）为主要原料，辅以榆木、白蜡木（性能次之）等替代材料。制作需经过木料筛选、驯弓流程及拳高设定工艺，弓弦采用羊肠或筋鞣制，弓背经亚麻籽油防潮处理。使用该武器需具备45-55公斤拉力，14-15世纪成为英军主力装备。'
   },
   artifact17: {
     id: 'artifact17',
     name: '角弓',
-    image: 'image/17.jpg',
+    image: 'artifacts_tools/1-9-角弓.png',
     description: '古代角弓是一种以动物角、竹木、筋腱和动物胶等天然材料制成的复合弓，其名称源于制作中使用的动物角材料。这种弓在中国古代主要用于骑战，具有工艺复杂、威力强劲的特点。'
   },
   artifact18: {
     id: 'artifact18',
-    name: '甲骑具装',
-    image: 'image/18.jpg',
+    name: '兵马',
+    image: 'artifacts_tools/3-20-兵马.png',
     description: '甲骑具装由人铠（甲骑）与马铠（具装）构成，南北朝时期马铠标准化为面帘、鸡颈、当胸等六部分，配备明光铠与马槊。该兵种通过密集阵形冲击敌军阵线，曾参与淝水之战等战役。隋代组建过五千具装甲骑部队，但装备耗费巨大，唐代因与突厥战争转向轻骑兵，仅保留仪仗用途。金代铁浮图覆灭后退出战场，中亚地区15世纪发展出链板甲体系，17世纪因火器普及彻底消亡。其装备体系对东北亚及波斯军事文化产生深远影响。'
+  },
+  artifactXiaojueDao: {
+    id: 'artifactXiaojueDao',
+    name: '小蕨刀',
+    image: 'artifacts_tools/2-11-小蕨刀.png',
+    description: '魏晋南北朝蕨手小刀。全长 11.6 cm，最宽处 1.9 cm，刃厚 0.3 cm，钢铁锻造，南北方皆出，多出自古战场遗址与古战刀、箭镞伴出，据传为古代军旅随身携带修理箭杆用的小刀。蕨手指蕨芽，其端卷曲，紫色而肥，状如小儿之手，故名蕨手。宋代杨万里《宿南岭驿》诗曰：“蕨手犹拳已箸长，菊苗初甲可羹尝。”此器坑口颇佳，状态很好，形制完整，铁性一流，可支持专业研磨。'
+  },
+  artifactMaShuo: {
+    id: 'artifactMaShuo',
+    name: '马槊',
+    image: 'artifacts_tools/2-11-马槊.png',
+    description: '马槊，中国古代冷兵器，是重型的骑兵武器，是槊的主要形态。东汉·许慎《说文解字》——“槊，矛也”；东汉·服虔《通俗文》——“槊，矛长丈八谓之槊”，马槊即是马上所用的矛。其他槊，还有步槊和冒称槊的杂槊等分类。基本上，说槊，多指马槊。'
   }
 };
 
-// 章节标题（与 mulan_expanded.json 中的节次顺序对应）
 const MULAN_SECTION_TITLES = [
   '当户织布',          // 第一节
   '女叹息',            // 第二节
@@ -125,16 +136,48 @@ const MULAN_SECTION_TITLES = [
 
 // 各节关联的器物（用下标索引，0 对应第一节）
 const ARTIFACT_ASSIGNMENTS = {
-  9: ['artifact9'],
-  10: ['artifact10'],
-  15: ['artifact15'],
-  17: ['artifact17'],
-  18: ['artifact18']
+  // 文件名规则：{视频章节}-{拼图图片编号}-{器具名}.{png/txt}
+  // 第二段编号对应拼图图片序号（09 拷贝.jpg => index 8）
+  8: ['artifact17'], // 1-9-角弓
+  10: ['artifactXiaojueDao', 'artifactMaShuo'], // 2-11-小蕨刀 / 2-11-马槊
+  15: ['artifact9'], // 3-16-环首刀
+  16: ['artifact15'], // 3-17-长弓
+  17: ['artifact10'], // 3-18-大型弩
+  19: ['artifact18']  // 3-20-兵马
 };
 
 const PROGRESS_KEY = 'mulanPuzzleProgress_v2';
+const VIDEO_BGM_KEY = 'mulanVideoBgmEnabled_v1';
 const DEFAULT_HORIZONTAL_PIECES = 4;
 const DEFAULT_VERTICAL_PIECES = 4;
+
+// 四段视频章节（入口封面 -> 章节选择 -> 视频播放）
+// 注意：index.html 位于 puzzle/ 目录，视频已放入 puzzle/image/
+const VIDEO_CHAPTERS = [
+  { id: 'v1', title: '唧唧当户织', video: 'image/1Q.mp4' },
+  { id: 'v2', title: '昨夜见军帖', video: 'image/2Q.mp4' },
+  { id: 'v3', title: '朔气照铁衣', video: 'image/3Q.mp4' },
+  { id: 'v4', title: '对镜贴花黄', video: 'image/4Q.mp4' }
+];
+
+// 视频中“定时暂停展示器具”配置（占位：等待你提供每段停留秒数）
+// 结构：{ [videoId]: [{ at: 秒数(Number), items: [artifactId...] }, ...] }
+// - at 为空/非数字时会被跳过，不会触发暂停
+// - items 支持多件器具，同一停点可“下一页”翻页
+const VIDEO_ARTIFACT_STOPS = {
+  v1: [{ at: 31, items: ['artifact17'] }], // 1-9-角弓-31.png
+  v2: [
+    { at: 6, items: ['artifactMaShuo'] }, // 2-11-马槊-6.png
+    { at: 9, items: ['artifactXiaojueDao'] } // 2-11-小蕨刀-09.png
+  ],
+  v3: [
+    { at: 2, items: ['artifact9'] }, // 3-16-环首刀-02.png
+    { at: 3, items: ['artifact15'] }, // 3-17-长弓-03
+    { at: 4, items: ['artifact10'] }, // 3-18-大型弩-04.png
+    { at: 11, items: ['artifact18'] } // 3-20-兵马-11.png
+  ],
+  v4: []
+};
 
 let MULAN_LEVELS = [];
 let currentLevelIndex = 0;
@@ -147,6 +190,150 @@ let initialPuzzleCanvasHeight = null;
 let puzzleResizeHandlerAttached = false;
 let bgmAudio = null;
 let bgmEnabled = false;
+let videoChaptersRendered = false;
+let videoBgmEnabled = true;
+let activeVideoStopIndex = 0;
+let activeVideoStopItems = null;
+let activeVideoStopItemIndex = 0;
+let activeVideoTimeHandler = null;
+let activeVideoSeekHandler = null;
+let activeVideoPollerId = null;
+let activeVideoId = null;
+let videoOverlayVisible = false;
+let videoPromptVisible = false;
+let pendingVideoStop = null; // { at:number, items:[artifactId...] }
+let pendingPromptTimeoutId = null;
+let videoPuzzleVisible = false;
+let pendingVideoPuzzle = null; // { at:number, imageSrc:string }
+let videoMiniPuzzleCanvas = null;
+let videoMiniPuzzleSolved = false;
+let videoMiniPuzzleImageSrc = null;
+let videoArtifactPageIndex = 0; // 0=器具介绍，1=拼图预览
+let videoArtifactPrimaryId = null; // 当前展示器具 id（用于拼图预览）
+
+
+const PUZZLE_NO_BY_ARTIFACT = {
+  artifact17: 9, // 1-9-角弓
+  artifactXiaojueDao: 11, // 2-11-小蕨刀
+  artifactMaShuo: 11, // 2-11-马槊
+  artifact9: 16, // 3-16-环首刀
+  artifact15: 17, // 3-17-长弓
+  artifact10: 18, // 3-18-大型弩
+  artifact18: 20 // 3-20-兵马
+};
+
+function getPuzzleImageSrcForArtifact(artifactId) {
+  const no = PUZZLE_NO_BY_ARTIFACT[artifactId];
+  if (typeof no !== 'number' || !Number.isFinite(no)) return null;
+  return `image/${String(no).padStart(2, '0')} 拷贝.jpg`;
+}
+
+function getPreviewImageSrcForArtifact(artifactId) {
+  const no = PUZZLE_NO_BY_ARTIFACT[artifactId];
+  if (typeof no !== 'number' || !Number.isFinite(no)) return null;
+  return `image/ext_preview/ext_${String(no).padStart(2, '0')}.jpg`;
+}
+
+function formatTimeMmSs(seconds) {
+  const s = Math.max(0, Math.floor(Number(seconds) || 0));
+  const mm = String(Math.floor(s / 60)).padStart(2, '0');
+  const ss = String(s % 60).padStart(2, '0');
+  return `${mm}:${ss}`;
+}
+
+let videoNavStops = [];
+let videoNavIndex = 0;
+let videoNavVideoId = null;
+
+function setVideoNavLabel(text) {
+  const el = $('video-nav-label');
+  if (el) el.textContent = text;
+}
+
+function updateVideoNavLabel() {
+  if (!videoNavStops.length) {
+    setVideoNavLabel('暂无点位');
+    return;
+  }
+  const stop = videoNavStops[videoNavIndex] || videoNavStops[0];
+  const firstId = Array.isArray(stop.items) ? stop.items[0] : null;
+  const first = firstId ? ARTIFACTS_CATALOG[firstId] : null;
+  const title = first ? first.name : '点位';
+  setVideoNavLabel(`${formatTimeMmSs(stop.at)} · ${title}`);
+}
+
+function closeVideoNav() {
+  const panel = $('video-nav-panel');
+  if (panel) panel.style.display = 'none';
+}
+
+function isVideoNavOpen() {
+  const panel = $('video-nav-panel');
+  if (!panel) return false;
+  return panel.style.display === 'block';
+}
+
+function openVideoNav() {
+  const panel = $('video-nav-panel');
+  if (panel) panel.style.display = 'block';
+}
+
+function toggleVideoNav() {
+  if (isVideoNavOpen()) closeVideoNav();
+  else openVideoNav();
+}
+
+function initVideoNav(videoId) {
+  videoNavVideoId = videoId;
+  videoNavStops = getVideoStops(videoId).filter((s) => s.at != null);
+  videoNavIndex = 0;
+  updateVideoNavLabel();
+}
+
+function jumpToVideoNavIndex(index) {
+  if (!videoNavStops.length) return;
+  videoNavIndex = (index + videoNavStops.length) % videoNavStops.length;
+  updateVideoNavLabel();
+  const stop = videoNavStops[videoNavIndex];
+
+  // 防止 seeking handler 立刻触发其他点位
+  const nextIdx = videoNavStops.findIndex((s) => s.at > stop.at);
+  activeVideoStopIndex = nextIdx === -1 ? videoNavStops.length : nextIdx;
+
+  const resolved = (stop.items || []).filter((id) => !!ARTIFACTS_CATALOG[id]);
+  if (resolved.length) {
+    openVideoArtifactAtStop({ at: stop.at, items: resolved });
+  }
+}
+
+function openVideoArtifactAtStop(stop) {
+  const videoEl = $('chapter-video');
+  if (!videoEl) return;
+
+  // 进入器具弹窗必须暂停
+  try {
+    videoEl.pause();
+    suppressSeekHandler = true;
+    if (typeof stop.at === 'number' && Number.isFinite(stop.at)) {
+      videoEl.currentTime = Math.min(stop.at, videoEl.duration || stop.at);
+    }
+    setTimeout(() => {
+      suppressSeekHandler = false;
+    }, 0);
+  } catch (_) {
+    suppressSeekHandler = false;
+  }
+
+  activeVideoStopItems = Array.isArray(stop.items) ? stop.items.slice() : [];
+  activeVideoStopItemIndex = 0;
+  if (activeVideoStopItems.length === 0) return;
+  const art = ARTIFACTS_CATALOG[activeVideoStopItems[0]];
+  if (!art) return;
+  showVideoArtifactOverlay(art, activeVideoStopItems.length > 1);
+}
+let videoPrevPlaybackRate = 1;
+let videoPlaybackRateAdjusted = false;
+let suppressSeekHandler = false;
 
 function loadProgress() {
   try {
@@ -202,6 +389,45 @@ function setBgmEnabled(enabled) {
   }
 }
 
+function loadVideoBgmSetting() {
+  try {
+    const raw = sessionStorage.getItem(VIDEO_BGM_KEY);
+    if (raw == null) return;
+    videoBgmEnabled = raw === '1';
+  } catch (_) {}
+}
+
+function syncVideoBgmButton() {
+  const btn = $('btn-video-bgm');
+  if (!btn) return;
+  if (videoBgmEnabled) {
+    btn.classList.remove('off');
+    btn.setAttribute('aria-label', '背景音乐：开启，点击关闭');
+  } else {
+    btn.classList.add('off');
+    btn.setAttribute('aria-label', '背景音乐：关闭，点击开启');
+  }
+}
+
+function applyVideoBgmPlayback() {
+  if (!bgmAudio) return;
+  if (!videoBgmEnabled) {
+    bgmAudio.pause();
+    return;
+  }
+  const p = bgmAudio.play();
+  if (p && typeof p.catch === 'function') p.catch(() => {});
+}
+
+function setVideoBgmEnabled(enabled) {
+  videoBgmEnabled = !!enabled;
+  try {
+    sessionStorage.setItem(VIDEO_BGM_KEY, videoBgmEnabled ? '1' : '0');
+  } catch (_) {}
+  syncVideoBgmButton();
+  applyVideoBgmPlayback();
+}
+
 function saveProgress() {
   try {
     sessionStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
@@ -239,6 +465,617 @@ function showView(id) {
       v.style.display = 'none';
     }
   });
+
+  // 这些页面期望“全屏且不滚动”，并且需要去掉 #app padding 以免出现多余滚动条
+  const fullscreenViews = new Set(['home', 'segments', 'video']);
+  document.body.classList.toggle('fullscreen', fullscreenViews.has(id));
+}
+
+function getVideoStops(videoId) {
+  const raw = VIDEO_ARTIFACT_STOPS[videoId] || [];
+  return raw
+    .map((s) => ({
+      at: typeof s.at === 'number' && Number.isFinite(s.at) ? s.at : null,
+      items: Array.isArray(s.items) ? s.items.slice() : []
+    }))
+    .filter((s) => s.items.length > 0)
+    .sort((a, b) => {
+      const atA = a.at == null ? Number.POSITIVE_INFINITY : a.at;
+      const atB = b.at == null ? Number.POSITIVE_INFINITY : b.at;
+      return atA - atB;
+    });
+}
+
+function setVideoPlaybackRateTemporarily(videoEl, rate) {
+  if (!videoEl) return;
+  if (!videoPlaybackRateAdjusted) {
+    videoPrevPlaybackRate = typeof videoEl.playbackRate === 'number' ? videoEl.playbackRate : 1;
+  }
+  videoPlaybackRateAdjusted = true;
+  try {
+    videoEl.playbackRate = rate;
+  } catch (_) {}
+}
+
+function restoreVideoPlaybackRate(videoEl) {
+  if (!videoEl || !videoPlaybackRateAdjusted) return;
+  try {
+    videoEl.playbackRate = videoPrevPlaybackRate;
+  } catch (_) {}
+  videoPlaybackRateAdjusted = false;
+}
+
+function hideVideoArtifactOverlay() {
+  const overlay = $('video-artifact-overlay');
+  if (overlay && overlay.style.display !== 'none') {
+    console.log('hideVideoArtifactOverlay');
+    overlay.style.display = 'none';
+  } else if (overlay) {
+    overlay.style.display = 'none';
+  }
+  videoOverlayVisible = false;
+  document.body.classList.remove('video-artifact-open');
+  restoreVideoPlaybackRate($('chapter-video'));
+}
+
+function hideVideoStopPrompt() {
+  const overlay = $('video-stop-prompt');
+  if (overlay) overlay.style.display = 'none';
+  videoPromptVisible = false;
+  pendingVideoStop = null;
+  pendingVideoPuzzle = null;
+  restoreVideoPlaybackRate($('chapter-video'));
+  setVideoStopHintArtifact(null);
+}
+
+function ignoreVideoStopPrompt() {
+  hideVideoStopPrompt();
+  const videoEl = $('chapter-video');
+  if (videoEl) {
+    const p = videoEl.play();
+    if (p && typeof p.catch === 'function') p.catch(() => {});
+  }
+}
+
+function showVideoStopPrompt(stop) {
+  const overlay = $('video-stop-prompt');
+  if (!overlay) return;
+  pendingVideoStop = stop;
+  overlay.style.display = 'grid';
+  videoPromptVisible = true;
+
+  // 停点出现时就暂停视频（不自动消失，必须用户手动选择）
+  const videoEl = $('chapter-video');
+  if (videoEl) {
+    try {
+      videoEl.pause();
+      suppressSeekHandler = true;
+      if (typeof stop.at === 'number' && Number.isFinite(stop.at)) {
+        videoEl.currentTime = Math.min(stop.at, videoEl.duration || stop.at);
+      }
+      setTimeout(() => {
+        suppressSeekHandler = false;
+      }, 0);
+    } catch (_) {
+      suppressSeekHandler = false;
+    }
+  }
+
+  const firstId = Array.isArray(stop.items) ? stop.items[0] : null;
+  const firstArtifact = firstId ? ARTIFACTS_CATALOG[firstId] : null;
+  setVideoStopHintArtifact(firstArtifact);
+
+  // 拼图入口：根据器具对应的拼图编号，直接用拼图原图来拼
+  const puzzleBtn = $('btn-video-stop-puzzle');
+  if (puzzleBtn) {
+    const puzzleArtifactId = (Array.isArray(stop.items) ? stop.items : []).find((id) =>
+      !!getPuzzleImageSrcForArtifact(id)
+    );
+    const imageSrc = puzzleArtifactId ? getPuzzleImageSrcForArtifact(puzzleArtifactId) : null;
+    if (imageSrc) {
+      pendingVideoPuzzle = { at: stop.at, imageSrc };
+      puzzleBtn.style.display = '';
+    } else {
+      puzzleBtn.style.display = 'none';
+    }
+  }
+}
+
+function setVideoStopHintArtifact(artifact) {
+  const imgEl = $('video-stop-hint-artifact');
+  if (!imgEl) return;
+  if (artifact && artifact.image) {
+    imgEl.style.display = 'block';
+    imgEl.src = artifact.image;
+    imgEl.alt = artifact.name || '器具预览';
+  } else {
+    imgEl.style.display = 'none';
+    imgEl.removeAttribute('src');
+    imgEl.alt = '器具预览';
+  }
+}
+
+function showVideoArtifactOverlay(artifact, hasNext) {
+  const overlay = $('video-artifact-overlay');
+  const imgEl = $('video-artifact-img');
+  const titleEl = $('video-artifact-title');
+  const descEl = $('video-artifact-desc');
+  const playBtn = $('btn-video-artifact-play-puzzle');
+  const previewImg = $('video-artifact-preview');
+  if (!overlay || !imgEl || !titleEl || !descEl) return;
+
+  imgEl.src = artifact.image;
+  imgEl.alt = artifact.name;
+  titleEl.textContent = artifact.name;
+  descEl.textContent = artifact.description || '';
+  videoArtifactPrimaryId = artifact.id || null;
+  setVideoArtifactModalPage(0);
+  syncVideoToolScrollIndicator();
+
+  const previewSrc = (videoArtifactPrimaryId && getPreviewImageSrcForArtifact(videoArtifactPrimaryId)) || artifact.image;
+  if (previewImg) previewImg.src = previewSrc;
+  if (playBtn) {
+    playBtn.disabled = !getPuzzleImageSrcForArtifact(videoArtifactPrimaryId);
+    playBtn.style.opacity = playBtn.disabled ? '0.55' : '';
+  }
+  if (previewImg) {
+    previewImg.onclick = () => {
+      openMiniPuzzleFromArtifactModal();
+    };
+  }
+
+  overlay.style.display = 'grid';
+  videoOverlayVisible = true;
+  document.body.classList.add('video-artifact-open');
+  console.log('showVideoArtifactOverlay display', {
+    artifactId: artifact.id,
+    hasNext,
+    items: activeVideoStopItems
+  });
+}
+
+function setVideoArtifactModalPage(pageIndex) {
+  videoArtifactPageIndex = pageIndex === 1 ? 1 : 0;
+  const track = $('video-artifact-pages-track');
+  if (track) {
+    track.style.transform = videoArtifactPageIndex === 1 ? 'translateX(-50%)' : 'translateX(0%)';
+  }
+  const returnBtn = $('btn-video-artifact-return');
+  if (returnBtn) {
+    if (videoArtifactPageIndex === 1) {
+      returnBtn.textContent = '← 介绍';
+      returnBtn.setAttribute('aria-label', '返回介绍');
+    } else {
+      returnBtn.textContent = '← 返回';
+      returnBtn.setAttribute('aria-label', '返回视频');
+    }
+  }
+
+  const toolScrollBtn = $('btn-video-tool-scroll');
+  if (toolScrollBtn) toolScrollBtn.style.display = 'none';
+  if (videoArtifactPageIndex === 0) {
+    syncVideoToolScrollIndicator();
+  }
+}
+
+function openVideoArtifactPage2() {
+  setVideoArtifactModalPage(1);
+}
+
+function openVideoArtifactPage1() {
+  setVideoArtifactModalPage(0);
+}
+
+function syncVideoToolScrollIndicator() {
+  const scroller = $('video-tool-text');
+  const btn = $('btn-video-tool-scroll');
+  if (!scroller || !btn) return;
+
+  // 只有文字区域确实产生滚动才显示倒三角，并且滚到底后隐藏
+  const overflow = scroller.scrollHeight - scroller.clientHeight > 6;
+  if (!overflow) {
+    btn.style.display = 'none';
+    return;
+  }
+  const atBottom = scroller.scrollTop + scroller.clientHeight >= scroller.scrollHeight - 8;
+  btn.style.display = atBottom ? 'none' : '';
+}
+
+function openMiniPuzzleFromArtifactModal() {
+  const id = videoArtifactPrimaryId;
+  const imageSrc = (id && getPuzzleImageSrcForArtifact(id)) || null;
+  if (!imageSrc) return;
+
+  // 关闭器具弹窗但不恢复视频（保持暂停），进入拼图覆盖层
+  hideVideoArtifactOverlay();
+  showVideoPuzzleOverlay();
+  startVideoMiniPuzzle(imageSrc);
+}
+
+function teardownVideoStopLogic(videoEl) {
+  if (!videoEl) return;
+  if (activeVideoTimeHandler) videoEl.removeEventListener('timeupdate', activeVideoTimeHandler);
+  if (activeVideoSeekHandler) videoEl.removeEventListener('seeking', activeVideoSeekHandler);
+  if (activeVideoPollerId) clearInterval(activeVideoPollerId);
+  activeVideoTimeHandler = null;
+  activeVideoSeekHandler = null;
+  activeVideoPollerId = null;
+  activeVideoId = null;
+  activeVideoStopIndex = 0;
+  activeVideoStopItems = null;
+  activeVideoStopItemIndex = 0;
+  hideVideoArtifactOverlay();
+  hideVideoStopPrompt();
+  hideVideoPuzzleOverlay({ resume: false });
+  restoreVideoPlaybackRate(videoEl);
+}
+
+function setupVideoStopLogic(videoEl, videoId) {
+  if (!videoEl) return;
+  teardownVideoStopLogic(videoEl);
+
+  activeVideoId = videoId;
+  const stops = getVideoStops(videoId);
+  activeVideoStopIndex = 0;
+
+  const maybeTrigger = () => {
+    if (!activeVideoId || videoOverlayVisible || videoPromptVisible || videoPuzzleVisible) return;
+    if (!stops.length) return;
+
+    // 元数据未就绪时可能拿不到 duration，先不触发
+    if (!Number.isFinite(videoEl.duration) || videoEl.duration <= 0) return;
+
+    // 跳过未配置秒数的停点
+    while (activeVideoStopIndex < stops.length && stops[activeVideoStopIndex].at == null) {
+      activeVideoStopIndex += 1;
+    }
+    if (activeVideoStopIndex >= stops.length) return;
+
+    const stop = stops[activeVideoStopIndex];
+    if (stop.at == null) return;
+    // 超出视频时长的停点直接跳过，避免“永远触发不到”
+    if (stop.at > videoEl.duration) {
+      activeVideoStopIndex += 1;
+      return;
+    }
+    if (videoEl.currentTime + 0.05 < stop.at) return;
+
+    // 触发：先给提示，引导用户点击后再打开介绍（避免突兀打断）
+    const resolvedItems = stop.items.filter((id) => !!ARTIFACTS_CATALOG[id]);
+    if (resolvedItems.length === 0) {
+      activeVideoStopIndex += 1;
+      return;
+    }
+    // 触发即消费该停点，避免重复触发
+    activeVideoStopIndex += 1;
+    openVideoArtifactAtStop({ at: stop.at, items: resolvedItems });
+  };
+
+  activeVideoTimeHandler = () => maybeTrigger();
+  activeVideoSeekHandler = () => {
+    if (suppressSeekHandler) return;
+    // 用户拖动进度条时：如果正在展示，先隐藏（避免卡住），然后继续按当前时间判断
+    if (videoOverlayVisible) {
+      hideVideoArtifactOverlay();
+    }
+    maybeTrigger();
+  };
+
+  videoEl.addEventListener('timeupdate', activeVideoTimeHandler);
+  videoEl.addEventListener('seeking', activeVideoSeekHandler);
+
+  // 兜底：部分环境 timeupdate 触发不稳定，用轮询保证能触发停点
+  activeVideoPollerId = setInterval(() => {
+    // 仅在播放中轮询，减少无意义计算
+    if (videoEl.paused || videoEl.ended) return;
+    maybeTrigger();
+  }, 120);
+
+  // 元数据加载后立即检查一次（避免刚好在停点附近错过）
+  const onMeta = () => {
+    maybeTrigger();
+    videoEl.removeEventListener('loadedmetadata', onMeta);
+  };
+  videoEl.addEventListener('loadedmetadata', onMeta);
+}
+
+function nextVideoArtifactPage() {
+  if (!activeVideoStopItems) return;
+  const videoEl = $('chapter-video');
+  if (!videoEl) return;
+
+  const nextIndex = activeVideoStopItemIndex + 1;
+  if (nextIndex >= activeVideoStopItems.length) return;
+
+  activeVideoStopItemIndex = nextIndex;
+  const art = ARTIFACTS_CATALOG[activeVideoStopItems[activeVideoStopItemIndex]];
+  if (art) {
+    showVideoArtifactOverlay(art, activeVideoStopItemIndex + 1 < activeVideoStopItems.length);
+  }
+}
+
+function closeVideoArtifactOverlayAndResume() {
+  const videoEl = $('chapter-video');
+  if (!videoEl) return;
+
+  console.log('closeVideoArtifactOverlayAndResume invoked', {
+    hadItems: !!activeVideoStopItems,
+    overlayVisible: videoOverlayVisible
+  });
+  hideVideoArtifactOverlay();
+  activeVideoStopItems = null;
+  activeVideoStopItemIndex = 0;
+
+  restoreVideoPlaybackRate(videoEl);
+  const p = videoEl.play();
+  if (p && typeof p.catch === 'function') p.catch(() => {});
+}
+
+function openVideoStopPrompt() {
+  const videoEl = $('chapter-video');
+  if (!videoEl || !pendingVideoStop) {
+    console.warn('openVideoStopPrompt early return', {
+      hasVideo: !!videoEl,
+      hasPendingStop: !!pendingVideoStop,
+      pendingVideoStop
+    });
+    return;
+  }
+  const stop = pendingVideoStop;
+  hideVideoStopPrompt();
+
+  // showVideoStopPrompt 已经负责 pause + 定位秒数，这里只负责打开介绍
+  activeVideoStopItems = Array.isArray(stop.items) ? stop.items.slice() : [];
+  activeVideoStopItemIndex = 0;
+  const logPayload = {
+    stop,
+    activeVideoStopItems,
+    pendingVideoStop: stop
+  };
+  console.log('openVideoStopPrompt -> start', logPayload);
+  if (activeVideoStopItems.length === 0) {
+    console.warn('openVideoStopPrompt aborted: no artifact items', { stop });
+    return;
+  }
+  const artId = activeVideoStopItems[0];
+  const art = ARTIFACTS_CATALOG[artId];
+  if (!art) {
+    console.warn('video artifact not found in catalog', {
+      firstId: artId,
+      stop,
+      hasCatalog: !!ARTIFACTS_CATALOG,
+      catalogKeys: Object.keys(ARTIFACTS_CATALOG || {}).slice(0, 30)
+    });
+    return;
+  }
+  console.log('openVideoStopPrompt -> showVideoArtifactOverlay', {
+    artifactId: artId,
+    hasNext: activeVideoStopItems.length > 1
+  });
+  showVideoArtifactOverlay(art, activeVideoStopItems.length > 1);
+}
+
+function hideVideoPuzzleOverlay({ resume = true } = {}) {
+  const overlay = $('video-puzzle-overlay');
+  if (overlay) overlay.style.display = 'none';
+  videoPuzzleVisible = false;
+  pendingVideoPuzzle = null;
+
+  const canvasHost = $('video-puzzle-canvas');
+  if (canvasHost) canvasHost.innerHTML = '';
+  videoMiniPuzzleCanvas = null;
+  videoMiniPuzzleSolved = false;
+  videoMiniPuzzleImageSrc = null;
+  setVideoPuzzleSolvedState(false);
+
+  const successEl = $('video-puzzle-success');
+  if (successEl) successEl.style.display = 'none';
+
+  restoreVideoPlaybackRate($('chapter-video'));
+  if (resume) {
+    const videoEl = $('chapter-video');
+    if (videoEl) {
+      const p = videoEl.play();
+      if (p && typeof p.catch === 'function') p.catch(() => {});
+    }
+  }
+}
+
+function showVideoPuzzleOverlay() {
+  const overlay = $('video-puzzle-overlay');
+  if (!overlay) return;
+  overlay.style.display = 'grid';
+  videoPuzzleVisible = true;
+}
+
+function setVideoPuzzleSolvedState(isSolved) {
+  const panel = document.querySelector('.video-puzzle-panel');
+  if (panel) panel.classList.toggle('is-solved', !!isSolved);
+  const hintBtn = $('btn-video-puzzle-hint');
+  if (hintBtn) hintBtn.style.display = isSolved ? 'none' : '';
+}
+
+function startVideoMiniPuzzle(imageSrc) {
+  const canvasHost = $('video-puzzle-canvas');
+  if (!canvasHost) return;
+  canvasHost.innerHTML = '';
+  videoMiniPuzzleCanvas = null;
+  videoMiniPuzzleSolved = false;
+  videoMiniPuzzleImageSrc = imageSrc;
+  setVideoPuzzleSolvedState(false);
+
+  const successEl = $('video-puzzle-success');
+  if (successEl) successEl.style.display = 'none';
+
+  const img = new Image();
+  img.src = imageSrc;
+  img.onload = function () {
+    const viewportW = window.innerWidth || 900;
+    const viewportH = window.innerHeight || 700;
+    const hostW = canvasHost.clientWidth || Math.min(980, viewportW * 0.92);
+    const hostH = canvasHost.clientHeight || Math.min(viewportH * 0.82, 820);
+
+    // 画布保持不变（CSS 控制 1:1 居中），这里只把“拼图实际区域”缩小一点，避免碎片过大
+    const miniScale = 0.78;
+    const canvasWidth = Math.max(260, Math.min(980, hostW * miniScale));
+    const canvasHeight = Math.max(260, Math.min(hostH * miniScale, viewportH * 0.86 * miniScale));
+
+    // 视频内小游戏：降低难度，3x3 或 4x3 更适合短暂停留
+    const horizontalPiecesCount = 3;
+    const verticalPiecesCount = 3;
+
+    const pieceSize = Math.floor(
+      Math.min(canvasWidth / horizontalPiecesCount, canvasHeight / verticalPiecesCount)
+    );
+
+    videoMiniPuzzleCanvas = new headbreaker.Canvas('video-puzzle-canvas', {
+      width: canvasWidth,
+      height: canvasHeight,
+      pieceSize,
+      proximity: 20,
+      borderFill: 10,
+      strokeWidth: 2,
+      lineSoftness: 0.22,
+      image: img,
+      strokeColor: '#ffffff',
+      outline: new headbreaker.outline.Rounded()
+    });
+    videoMiniPuzzleCanvas.adjustImagesToPuzzleHeight();
+    videoMiniPuzzleCanvas.autogenerate({ horizontalPiecesCount, verticalPiecesCount });
+    videoMiniPuzzleCanvas.attachSolvedValidator();
+    videoMiniPuzzleCanvas.onValid(function () {
+      if (videoMiniPuzzleSolved) return;
+      videoMiniPuzzleSolved = true;
+      setVideoPuzzleSolvedState(true);
+      const successEl = $('video-puzzle-success');
+      if (successEl) successEl.style.display = 'grid';
+      const imgEl = $('video-puzzle-success-img');
+      if (imgEl) imgEl.src = imageSrc;
+    });
+    if (typeof videoMiniPuzzleCanvas.shuffle === 'function') {
+      videoMiniPuzzleCanvas.shuffle(0.85);
+    } else if (typeof videoMiniPuzzleCanvas.shuffleGrid === 'function') {
+      videoMiniPuzzleCanvas.shuffleGrid();
+    }
+    videoMiniPuzzleCanvas.draw();
+  };
+  img.onerror = function () {
+    alert(`拼图图片加载失败：${imageSrc}`);
+  };
+}
+
+function showVideoPuzzleHint() {
+  if (videoMiniPuzzleSolved) return;
+  if (!videoMiniPuzzleImageSrc) return;
+  const modal = $('hint-modal');
+  const imgEl = $('hint-image');
+  if (!modal || !imgEl) return;
+  imgEl.src = videoMiniPuzzleImageSrc;
+  imgEl.alt = '拼图原图提示';
+  modal.style.display = 'flex';
+  if (hintTimerId) clearTimeout(hintTimerId);
+  hintTimerId = setTimeout(() => {
+    modal.style.display = 'none';
+  }, 1800);
+}
+
+function openVideoStopPuzzle() {
+  const videoEl = $('chapter-video');
+  if (!videoEl || !pendingVideoPuzzle) return;
+  const puzzle = pendingVideoPuzzle;
+  hideVideoStopPrompt();
+
+  try {
+    videoEl.pause();
+    suppressSeekHandler = true;
+    if (typeof puzzle.at === 'number' && Number.isFinite(puzzle.at)) {
+      videoEl.currentTime = Math.min(puzzle.at, videoEl.duration || puzzle.at);
+    }
+    setTimeout(() => {
+      suppressSeekHandler = false;
+    }, 0);
+  } catch (_) {
+    suppressSeekHandler = false;
+  }
+
+  showVideoPuzzleOverlay();
+  startVideoMiniPuzzle(puzzle.imageSrc);
+}
+
+function renderVideoChapters() {
+  const listEl = $('segments-list');
+  if (!listEl) return;
+  if (videoChaptersRendered) return;
+  videoChaptersRendered = true;
+
+  listEl.innerHTML = '';
+  VIDEO_CHAPTERS.forEach((chapter, idx) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'segment-circle-btn';
+    btn.classList.add(idx % 2 === 0 ? 'odd' : 'even');
+    btn.setAttribute('data-video-id', chapter.id);
+    btn.setAttribute('aria-label', `播放：${chapter.title}`);
+
+    const text = document.createElement('span');
+    text.className = 'segment-title-text';
+    text.textContent = chapter.title;
+    btn.appendChild(text);
+    // 覆盖上方异常的 aria-label
+    btn.setAttribute('aria-label', `播放：${chapter.title}`);
+
+    btn.addEventListener('click', () => openVideoChapter(idx));
+    listEl.appendChild(btn);
+  });
+}
+
+function stopVideoPlayback() {
+  const videoEl = $('chapter-video');
+  if (!videoEl) return;
+  teardownVideoStopLogic(videoEl);
+  closeVideoNav();
+  // 离开视频时停止视频背景音乐
+  if (bgmAudio) bgmAudio.pause();
+  try {
+    videoEl.pause();
+    videoEl.removeAttribute('src');
+    videoEl.load();
+  } catch (_) {}
+}
+
+function openVideoChapter(index) {
+  const chapter = VIDEO_CHAPTERS[index];
+  if (!chapter) return;
+
+  const titleEl = $('video-title');
+  if (titleEl) titleEl.textContent = chapter.title;
+
+  const videoEl = $('chapter-video');
+  if (videoEl) {
+    try {
+      videoEl.pause();
+      videoEl.src = chapter.video;
+      videoEl.load();
+    } catch (_) {}
+  }
+
+  // 视频页使用独立喇叭开关播放背景音乐（视频本身是无声的）
+  syncVideoBgmButton();
+  applyVideoBgmPlayback();
+  initVideoNav(chapter.id);
+  closeVideoNav();
+
+  showView('video');
+
+  if (videoEl) {
+    setupVideoStopLogic(videoEl, chapter.id);
+    const p = videoEl.play();
+    if (p && typeof p.catch === 'function') p.catch(() => {});
+    videoEl.onended = () => {
+      stopVideoPlayback();
+      showView('segments');
+    };
+  }
 }
 
 function initChapterList() {
@@ -594,19 +1431,18 @@ function initGlobalEvents() {
     }
   };
 
-  const goToChapters = () => {
+  const goToSegments = () => {
     setHomeToggleActive('start');
     tryPlayBgm();
-    showView('chapters');
-    initChapterList();
-    updateProgressText();
+    showView('segments');
+    renderVideoChapters();
   };
 
   if (startBtn) {
-    startBtn.addEventListener('click', goToChapters);
+    startBtn.addEventListener('click', goToSegments);
   }
   if (homeStartBtn) {
-    homeStartBtn.addEventListener('click', goToChapters);
+    homeStartBtn.addEventListener('click', goToSegments);
   }
   if (homeSettingsBtn) {
     homeSettingsBtn.addEventListener('click', () => {
@@ -643,7 +1479,183 @@ function initGlobalEvents() {
   if (backHomeFromChapters) {
     backHomeFromChapters.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'auto' });
+      showView('segments');
+      renderVideoChapters();
+    });
+  }
+
+  const backHomeFromSegments = $('btn-segments-home');
+  if (backHomeFromSegments) {
+    backHomeFromSegments.addEventListener('click', () => {
+      stopVideoPlayback();
+      window.scrollTo({ top: 0, behavior: 'auto' });
       showView('home');
+    });
+  }
+
+  const segmentsToPuzzleBtn = $('btn-segments-puzzle');
+  if (segmentsToPuzzleBtn) {
+    segmentsToPuzzleBtn.addEventListener('click', () => {
+      stopVideoPlayback();
+      showView('chapters');
+      initChapterList();
+      updateProgressText();
+    });
+  }
+
+  const videoBackBtn = $('btn-video-back');
+  if (videoBackBtn) {
+    videoBackBtn.addEventListener('click', () => {
+      stopVideoPlayback();
+      showView('segments');
+    });
+  }
+
+  const videoBgmBtn = $('btn-video-bgm');
+  if (videoBgmBtn) {
+    videoBgmBtn.addEventListener('click', () => {
+      setVideoBgmEnabled(!videoBgmEnabled);
+    });
+  }
+
+  const videoNavBtn = $('btn-video-nav');
+  if (videoNavBtn) {
+    videoNavBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleVideoNav();
+    });
+  }
+  const videoNavPrevBtn = $('btn-video-nav-prev');
+  if (videoNavPrevBtn) {
+    videoNavPrevBtn.addEventListener('click', () => {
+      jumpToVideoNavIndex(videoNavIndex - 1);
+    });
+  }
+  const videoNavNextBtn = $('btn-video-nav-next');
+  if (videoNavNextBtn) {
+    videoNavNextBtn.addEventListener('click', () => {
+      jumpToVideoNavIndex(videoNavIndex + 1);
+    });
+  }
+  const videoNavPanel = $('video-nav-panel');
+  if (videoNavPanel) {
+    videoNavPanel.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+  }
+  // 点击空白关闭
+  document.addEventListener('click', () => {
+    closeVideoNav();
+  });
+
+  const videoArtifactCloseBtn = $('btn-video-artifact-close');
+  if (videoArtifactCloseBtn) {
+    videoArtifactCloseBtn.addEventListener('click', () => {
+      closeVideoArtifactOverlayAndResume();
+    });
+  }
+  const videoArtifactReturnBtn = $('btn-video-artifact-return');
+  if (videoArtifactReturnBtn) {
+    videoArtifactReturnBtn.addEventListener('click', () => {
+      if (videoArtifactPageIndex === 1) {
+        openVideoArtifactPage1();
+      } else {
+        closeVideoArtifactOverlayAndResume();
+      }
+    });
+  }
+  const videoArtifactCtaBtn = $('btn-video-artifact-cta');
+  if (videoArtifactCtaBtn) {
+    videoArtifactCtaBtn.addEventListener('click', () => {
+      openVideoArtifactPage2();
+    });
+  }
+  const videoArtifactPlayPuzzleBtn = $('btn-video-artifact-play-puzzle');
+  if (videoArtifactPlayPuzzleBtn) {
+    videoArtifactPlayPuzzleBtn.addEventListener('click', () => {
+      openMiniPuzzleFromArtifactModal();
+    });
+  }
+  const toolScrollBtn = $('btn-video-tool-scroll');
+  if (toolScrollBtn) {
+    toolScrollBtn.addEventListener('click', () => {
+      const scroller = $('video-tool-text');
+      if (!scroller) return;
+      scroller.scrollBy({ top: Math.max(140, Math.floor(scroller.clientHeight * 0.72)), behavior: 'smooth' });
+      // 滚动是异步的，稍后再校准一次按钮显示
+      setTimeout(syncVideoToolScrollIndicator, 260);
+    });
+  }
+  const toolText = $('video-tool-text');
+  if (toolText) {
+    toolText.addEventListener('scroll', () => {
+      syncVideoToolScrollIndicator();
+    });
+  }
+  const videoOverlay = $('video-artifact-overlay');
+  if (videoOverlay) {
+    videoOverlay.addEventListener('click', (e) => {
+      if (e.target === videoOverlay) {
+        closeVideoArtifactOverlayAndResume();
+      }
+    });
+  }
+
+  const stopPrompt = $('video-stop-prompt');
+  if (stopPrompt) {
+    stopPrompt.addEventListener('click', (e) => {
+      if (e.target === stopPrompt) {
+        openVideoStopPrompt();
+      }
+    });
+  }
+  const stopOpenBtn = $('btn-video-stop-open');
+  if (stopOpenBtn) {
+    stopOpenBtn.addEventListener('click', () => {
+      openVideoStopPrompt();
+    });
+  }
+  const stopIgnoreBtn = $('btn-video-stop-ignore');
+  if (stopIgnoreBtn) {
+    stopIgnoreBtn.addEventListener('click', () => {
+      ignoreVideoStopPrompt();
+    });
+  }
+  const stopPuzzleBtn = $('btn-video-stop-puzzle');
+  if (stopPuzzleBtn) {
+    stopPuzzleBtn.addEventListener('click', () => {
+      openVideoStopPuzzle();
+    });
+  }
+
+  const videoPuzzleOverlay = $('video-puzzle-overlay');
+  if (videoPuzzleOverlay) {
+    videoPuzzleOverlay.addEventListener('click', (e) => {
+      if (e.target === videoPuzzleOverlay) {
+        // 只允许通过按钮退出，避免误触
+        return;
+      }
+    });
+  }
+  const videoPuzzleHomeBtn = $('btn-video-puzzle-home');
+  if (videoPuzzleHomeBtn) {
+    videoPuzzleHomeBtn.addEventListener('click', () => {
+      hideVideoPuzzleOverlay({ resume: false });
+      stopVideoPlayback();
+      window.scrollTo({ top: 0, behavior: 'auto' });
+      showView('home');
+    });
+  }
+  const videoPuzzleCloseBtn = $('btn-video-puzzle-close');
+  if (videoPuzzleCloseBtn) {
+    videoPuzzleCloseBtn.addEventListener('click', () => {
+      hideVideoPuzzleOverlay({ resume: true });
+    });
+  }
+  const videoPuzzleHintBtn = $('btn-video-puzzle-hint');
+  if (videoPuzzleHintBtn) {
+    videoPuzzleHintBtn.addEventListener('click', () => {
+      showVideoPuzzleHint();
     });
   }
   const backToChaptersFromPuzzle = $('btn-back-chapters');
@@ -707,6 +1719,7 @@ function initGlobalEvents() {
 
 function initApp() {
   loadProgress();
+  loadVideoBgmSetting();
   initGlobalEvents();
   bgmAudio = $('bgm-audio');
   if (bgmAudio && bgmEnabled) {
