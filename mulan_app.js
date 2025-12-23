@@ -234,6 +234,11 @@ function getPreviewImageSrcForArtifact(artifactId) {
   return `image/ext_preview/ext_${String(no).padStart(2, '0')}.jpg`;
 }
 
+function getCoverImageSrcForArtifact(artifactId) {
+  // Prefer the wide preview (better as background), fallback to the puzzle original.
+  return getPreviewImageSrcForArtifact(artifactId) || getPuzzleImageSrcForArtifact(artifactId) || null;
+}
+
 function formatTimeMmSs(seconds) {
   const s = Math.max(0, Math.floor(Number(seconds) || 0));
   const mm = String(Math.floor(s / 60)).padStart(2, '0');
@@ -729,8 +734,10 @@ function showVideoStopPrompt(stop) {
       forceVideoInline(videoEl);
       setNativeVideoControlsSuppressed(videoEl, true);
       // Android 部分内核下视频层会压过 DOM：这里通过隐藏 video（setNativeVideoControlsSuppressed）
-      // 来保证提示/器具卡片能稳定显示；不再额外铺一张器具图，避免“多余图片”贴近文字背景。
-      showVideoCover(null);
+      // 来保证提示/器具卡片能稳定显示；封面使用“对应拼图原画/预览图”伪装视频仍在。
+      const firstId = Array.isArray(stop.items) ? stop.items[0] : null;
+      const coverSrc = firstId ? getCoverImageSrcForArtifact(firstId) : null;
+      showVideoCover(coverSrc);
       suppressSeekUntilSettled(videoEl, () => {
         videoEl.pause();
         if (typeof stop.at === 'number' && Number.isFinite(stop.at)) {
@@ -789,7 +796,7 @@ function showVideoArtifactOverlay(artifact, hasNext) {
   if (!overlay || !imgEl || !titleEl || !descEl) return;
 
   setNativeVideoControlsSuppressed($('chapter-video'), true);
-  showVideoCover(null);
+  showVideoCover(artifact && artifact.id ? getCoverImageSrcForArtifact(artifact.id) : null);
   imgEl.src = artifact.image;
   imgEl.alt = artifact.name;
   titleEl.textContent = artifact.name;
