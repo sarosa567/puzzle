@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>木兰辞 · 数字绘本拼图</title>
+  <title>木兰辞</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script>
     tailwind.config = {
@@ -134,7 +134,17 @@
     .home-title-block {
       margin-top: 4px;
       text-align: center;
-      color: #fff;
+      color: #8b1a1a;
+    }
+    .home-title-actions {
+      position: absolute;
+      bottom: 12vh;
+      left: 75vw;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
     }
     .home-hero-inner {
       transform: translateY(-40px);
@@ -580,6 +590,7 @@
     #btn-video-bgm.video-float-btn { left: 12px; right: auto; }
     #btn-video-back.video-float-btn { left: 12px; top: 52px; }
     #btn-video-nav.video-float-btn { right: 54px; }
+    #btn-video-rotate.video-float-btn { right: 12px; }
     .video-nav-btn {
       position: relative;
       width: 32px;
@@ -1629,21 +1640,17 @@
     <section class="view-section" data-view="home">
       <div
         class="relative home-hero-inner flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat p-4 sm:p-6"
-        style="background-image: linear-gradient(rgba(33,17,17,0.45), rgba(33,17,17,0.8)), url('image/hero_bg.png');">
-        <div class="home-title-block">
-          <div id="home-main-title">木兰辞</div>
-          <div id="home-subtitle">数字绘本拼图</div>
-        </div>
+        style="background-image: url('image/hero_bg.png');">
         <div id="btn-start" class="mt-5 w-full max-w-xs cursor-pointer">
-          <img
-            src="image/01 拷贝.jpg"
-            alt="木兰辞绘本封面"
-            class="aspect-square w-full h-auto object-cover rounded-xl shadow-2xl border-4 border-white/20 transition-transform duration-300 hover:scale-105"
-          />
         </div>
-        <div class="home-toggle-row">
-          <button id="btn-home-start" class="home-toggle-btn home-toggle-btn-active">进入游戏</button>
-          <button id="btn-home-settings" class="home-toggle-btn">设置</button>
+        <div class="home-title-actions">
+          <div class="home-title-block">
+            <div id="home-main-title">木兰辞</div>
+          </div>
+          <div class="home-toggle-row">
+            <button id="btn-home-start" class="home-toggle-btn home-toggle-btn-active">进入游戏</button>
+            <button id="btn-home-settings" class="home-toggle-btn">设置</button>
+          </div>
         </div>
       </div>
     </section>
@@ -1674,6 +1681,9 @@
           </button>
           <button id="btn-video-nav" class="video-float-btn video-nav-btn" type="button" aria-label="点位导航" title="点位导航">
             <span>点</span>
+          </button>
+          <button id="btn-video-rotate" class="video-float-btn video-rotate-btn" type="button" aria-label="伪横屏" title="伪横屏">
+            横
           </button>
           <button id="btn-video-bgm" class="video-float-btn video-bgm-btn" type="button" aria-label="背景音乐开关" title="背景音乐">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
