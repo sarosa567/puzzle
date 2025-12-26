@@ -1042,7 +1042,6 @@
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
-      border-radius: 12px;
       background: rgba(0,0,0,0.10);
       box-shadow: 0 0 0 2px rgba(255,255,255,0.06) inset;
       margin: 0 auto;
@@ -1082,7 +1081,7 @@
       align-items: stretch;
       gap: 10px;
       /* toolbg 内留白，避免文字“顶到边/溢出”，底部留更多空间 */
-      padding:6vh 13vw 21vh;
+      padding:11.5vh 14vw 20vh;
       min-width: 0;
       box-sizing: border-box;
       flex: 1 1 auto;
@@ -1128,7 +1127,7 @@
     .video-tool-desc {
       margin: 0;
       font-size: 14px;
-      line-height: 1.85;
+      line-height: 1.65;
       white-space: pre-line;
     }
     .video-tool-scroll-btn {
@@ -1219,6 +1218,35 @@
       justify-content: flex-end;
       flex: 0 0 auto;
       flex-wrap: wrap;
+    }
+    #btn-video-artifact-audio {
+      position: absolute;
+      bottom: 0vh;
+      left: 43vw;
+      transform: translateX(-50%);
+      z-index: 2;
+      background: #b2875b;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    #btn-video-artifact-audio:hover {
+      background: #9a7148;
+      transform: translateX(-50%) translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+    }
+    #btn-video-artifact-audio.playing {
+      background: #ea2a33;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
     }
     .video-artifact-img {
       width: 100%;
@@ -1784,6 +1812,7 @@
                           <p id="video-artifact-desc" class="video-tool-desc"></p>
                         </div>
                         <button id="btn-video-tool-scroll" class="video-tool-scroll-btn" type="button" aria-label="下滑查看更多"></button>
+                        <button id="btn-video-artifact-audio" class="btn video-artifact-audio-btn" type="button" aria-label="播放音频介绍">🔊 播放介绍</button>
                       </div>
                     </div>
                   </div>

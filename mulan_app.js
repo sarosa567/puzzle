@@ -1,4 +1,4 @@
-// 木兰辞拼图主应用脚本（纯原生 JS + Headbreaker）
+﻿// 木兰辞拼图主应用脚本（纯原生 JS + Headbreaker）
 
 // 器物配置表
 const ARTIFACTS_CATALOG = {
@@ -6,7 +6,8 @@ const ARTIFACTS_CATALOG = {
     id: 'loom',
     name: '织布机',
     image: 'artifacts/artifact_01_loom.png',
-    description: '木兰在家门口操作的立式木制织布机，是开篇家庭生活的核心道具。'
+    description: '木兰在家门口操作的立式木制织布机，是开篇家庭生活的核心道具。',
+    audio: 'artifacts_audio/loom.mp3' // 音频文件路径
   },
   saddleBridle: {
     id: 'saddleBridle',
@@ -30,7 +31,7 @@ const ARTIFACTS_CATALOG = {
     id: 'makeupBox',
     name: '妆奁',
     image: 'artifacts/artifact_05_makeup_box.png',
-    description: '盛放粉盒、口脂的小木妆奁，用在“当窗理云鬓，对镜贴花黄”等返乡换装情节。'
+    description: '妆奁："奁，镜匣也"，是古代女性专门盛放梳妆用品的匣子。最初仅指铜镜的收纳盒，后逐渐扩展为盛放各类化妆品、首饰的多功能梳妆匣，甚至成为嫁妆的代名词。这一方精致的匣子，不仅是中国女性三千年美丽的见证，更是传统文化中不可多得的瑰宝。从最初的铜镜之匣，到嫁妆的代名词，它承载着女性的私密记忆、家族的情感纽带和时代的审美变迁。', audio: 'artifacts_audio/artifactMakeupBox.mp3', audio: 'artifacts_audio/artifactMakeupBox.mp3'
   },
   mirror: {
     id: 'mirror',
@@ -60,31 +61,36 @@ const ARTIFACTS_CATALOG = {
     id: 'artifact9',
     name: '环首刀',
     image: 'artifacts_tools/3-16-环首刀.png',
-    description: '环首刀又称汉刀、环头刀，是一种以手持为主的短兵器，特点是单面开锋，厚脊薄刃，直脊直刃，刀柄首呈圆环形。环首刀是当时世界上非常先进、杀伤力极强的近身冷兵器，在人类历史上具有非凡意义。环首刀由汉剑演化而来。剑利于突刺，不利于劈砍，不适合骑兵作战。于是汉朝人将剑改为单面开刃、厚脊等结构。刀柄处的圆环可以拴绳子，作战时把绳子绕在手上，可以避免刀在手中脱落。'
+    description: '环首刀又称汉刀、环头刀，是一种以手持为主的短兵器，特点是单面开锋，厚脊薄刃，直脊直刃，刀柄首呈圆环形。环首刀是当时世界上非常先进、杀伤力极强的近身冷兵器，在人类历史上具有非凡意义。环首刀由汉剑演化而来。剑利于突刺，不利于劈砍，不适合骑兵作战。于是汉朝人将剑改为单面开刃、厚脊等结构。刀柄处的圆环可以拴绳子，作战时把绳子绕在手上，可以避免刀在手中脱落。',
+    audio: 'artifacts_audio/artifact9.mp3'
   },
   artifact10: {
     id: 'artifact10',
     name: '大型弩',
     image: 'artifacts_tools/3-18-大型弩.png',
-    description: '中国古代一种威力较大的弩。将一张或几张弓安装在床架上，以绞动其后部的轮轴张弓装箭，待机发射。多弓床弩可用多人绞轴，用几张弓的合力发箭，其弹射力远远超过单人使用的擘张、蹶张或腰引弩。'
+    description: '中国古代一种威力较大的弩。将一张或几张弓安装在床架上，以绞动其后部的轮轴张弓装箭，待机发射。多弓床弩可用多人绞轴，用几张弓的合力发箭，其弹射力远远超过单人使用的擘张、蹶张或腰引弩。',
+    audio: 'artifacts_audio/artifact10.mp3'
   },
   artifact15: {
     id: 'artifact15',
     name: '长弓',
     image: 'artifacts_tools/3-17-长弓.png',
-    description: '长弓是源自威尔士的单体木制远程武器，一般长1.5米左右，个别的长达1.8-2米，以紫杉木（性能最优）为主要原料，辅以榆木、白蜡木（性能次之）等替代材料。制作需经过木料筛选、驯弓流程及拳高设定工艺，弓弦采用羊肠或筋鞣制，弓背经亚麻籽油防潮处理。使用该武器需具备45-55公斤拉力，14-15世纪成为英军主力装备。'
+    description: '长弓是源自威尔士的单体木制远程武器，一般长1.5米左右，个别的长达1.8-2米，以紫杉木（性能最优）为主要原料，辅以榆木、白蜡木（性能次之）等替代材料。制作需经过木料筛选、驯弓流程及拳高设定工艺，弓弦采用羊肠或筋鞣制，弓背经亚麻籽油防潮处理。使用该武器需具备45-55公斤拉力，14-15世纪成为英军主力装备。',
+    audio: 'artifacts_audio/artifact15.mp3'
   },
   artifact17: {
     id: 'artifact17',
     name: '角弓',
     image: 'artifacts_tools/1-9-角弓.png',
-    description: '古代角弓是一种以动物角、竹木、筋腱和动物胶等天然材料制成的复合弓，其名称源于制作中使用的动物角材料。这种弓在中国古代主要用于骑战，具有工艺复杂、威力强劲的特点。'
+    description: '古代角弓是一种以动物角、竹木、筋腱和动物胶等天然材料制成的复合弓，其名称源于制作中使用的动物角材料。这种弓在中国古代主要用于骑战，具有工艺复杂、威力强劲的特点。',
+    audio: 'artifacts_audio/artifact17.mp3'
   },
   artifact18: {
     id: 'artifact18',
     name: '兵马',
     image: 'artifacts_tools/3-20-兵马.png',
-    description: '甲骑具装由人铠（甲骑）与马铠（具装）构成，南北朝时期马铠标准化为面帘、鸡颈、当胸等六部分，配备明光铠与马槊。该兵种通过密集阵形冲击敌军阵线，曾参与淝水之战等战役。隋代组建过五千具装甲骑部队，但装备耗费巨大，唐代因与突厥战争转向轻骑兵，仅保留仪仗用途。金代铁浮图覆灭后退出战场，中亚地区15世纪发展出链板甲体系，17世纪因火器普及彻底消亡。其装备体系对东北亚及波斯军事文化产生深远影响。'
+    description: '甲骑具装由人铠（甲骑）与马铠（具装）构成，南北朝时期马铠标准化为面帘、鸡颈、当胸等六部分，配备明光铠与马槊。该兵种通过密集阵形冲击敌军阵线，曾参与淝水之战等战役。隋代组建过五千具装甲骑部队，但装备耗费巨大，唐代因与突厥战争转向轻骑兵，仅保留仪仗用途。金代铁浮图覆灭后退出战场，中亚地区15世纪发展出链板甲体系，17世纪因火器普及彻底消亡。其装备体系对东北亚及波斯军事文化产生深远影响。',
+    audio: 'artifacts_audio/artifact18.mp3'
   },
   artifactXiaojueDao: {
     id: 'artifactXiaojueDao',
@@ -97,6 +103,20 @@ const ARTIFACTS_CATALOG = {
     name: '马槊',
     image: 'artifacts_tools/2-11-马槊.png',
     description: '马槊，中国古代冷兵器，是重型的骑兵武器，是槊的主要形态。东汉·许慎《说文解字》——“槊，矛也”；东汉·服虔《通俗文》——“槊，矛长丈八谓之槊”，马槊即是马上所用的矛。其他槊，还有步槊和冒称槊的杂槊等分类。基本上，说槊，多指马槊。'
+  },
+  artifact32: {
+    id: 'artifact32',
+    name: '雄兔雌兔',
+    image: 'artifacts/artifact_32_rabbits.png',
+    description: '公兔的作用：在野生群居兔群中，优势公兔会划定领地范围，保护领地内的母兔和幼兔免受外敌或其他公兔的侵扰；弱势公兔则会被驱逐，避免近亲繁殖。而母兔的作用:繁殖与哺育后代：这是母兔最核心的种族角色。母兔怀孕后会精心搭建巢穴，生产后用自身毛发铺垫巢穴保暖；哺乳期会定时回到巢穴喂养幼兔，直到幼兔能自主进食；母兔的母性强弱直接影响幼兔的存活率。',
+    audio: 'artifacts_audio/artifactRabbits.mp3'
+  },
+  artifact34: {
+    id: 'artifact34',
+    name: '红玉钗',
+    image: 'artifacts/artifact_34_jade_hairpin.png',
+    description: '"钗"是在"簪"的基础上发展演化而来的，由两股簪交叉组合而成的一种"双股长针"。钗既可以用来绾住头发，也可以用它把帽子别在头发上。钗的质地多为金、银、铜等。钗的使用方法有横插、竖插、斜插和倒插。使用钗的数量很随意，既可以在头发上插两支钗，左右各插一支；也可以插数支，视发髻需要而定；最多的可以在云鬓两侧各插六支，合计十二支。',
+    audio: 'artifacts_audio/artifactJadeHairpin.mp3'
   }
 };
 
@@ -165,10 +185,13 @@ const VIDEO_CHAPTERS = [
 // - at 为空/非数字时会被跳过，不会触发暂停
 // - items 支持多件器具，同一停点可“下一页”翻页
 const VIDEO_ARTIFACT_STOPS = {
-  v1: [{ at: 31, items: ['artifact17'] }], // 1-9-角弓-31.png
+  v1: [
+    { at: 15, items: ['makeupBox'] }, // 1-5-妆奁-15秒
+    { at: 31, items: ['artifact17'] } // 1-9-角弓-31.png
+  ],
   v2: [
     { at: 6, items: ['artifactMaShuo'] }, // 2-11-马槊-6.png
-    { at: 9, items: ['artifactXiaojueDao'] } // 2-11-小蕨刀-09.png
+    { at: 9, items: ['artifactXiaojueDao'] } // 2-12-小蕨刀-09.png
   ],
   v3: [
     { at: 2, items: ['artifact9'] }, // 3-16-环首刀-02.png
@@ -176,7 +199,10 @@ const VIDEO_ARTIFACT_STOPS = {
     { at: 4, items: ['artifact10'] }, // 3-18-大型弩-04.png
     { at: 11, items: ['artifact18'] } // 3-20-兵马-11.png
   ],
-  v4: []
+  v4: [
+    { at: 20, items: ['artifact32'] }, // 4-32-雄兔雌兔-20秒
+    { at: 35, items: ['artifact34'] } // 4-34-归乡团圆-35秒
+  ]
 };
 
 let MULAN_LEVELS = [];
@@ -210,16 +236,21 @@ let videoMiniPuzzleSolved = false;
 let videoMiniPuzzleImageSrc = null;
 let videoArtifactPageIndex = 0; // 0=器具介绍，1=拼图预览
 let videoArtifactPrimaryId = null; // 当前展示器具 id（用于拼图预览）
+let artifactAudioPlayer = null; // 器具音频播放器
+let currentPlayingArtifactId = null; // 当前播放的器具 ID
 
 
 const PUZZLE_NO_BY_ARTIFACT = {
   artifact17: 9, // 1-9-角弓
-  artifactXiaojueDao: 11, // 2-11-小蕨刀
+  artifactXiaojueDao: 12, // 2-12-小蕨刀
   artifactMaShuo: 11, // 2-11-马槊
   artifact9: 16, // 3-16-环首刀
   artifact15: 17, // 3-17-长弓
   artifact10: 18, // 3-18-大型弩
-  artifact18: 20 // 3-20-兵马
+  artifact18: 20, // 3-20-兵马
+  makeupBox: 5, // 1-5-妆奁
+  artifact32: 32, // 4-32-雄兔雌兔
+  artifact34: 34 // 4-34-归乡团圆
 };
 
 function getPuzzleImageSrcForArtifact(artifactId) {
@@ -695,6 +726,7 @@ function hideVideoArtifactOverlay() {
   setNativeVideoControlsSuppressed($('chapter-video'), false);
   hideVideoCover();
   restoreVideoPlaybackRate($('chapter-video'));
+  stopArtifactAudio(); // 关闭弹窗时停止音频播放
 }
 
 function hideVideoStopPrompt() {
@@ -793,6 +825,7 @@ function showVideoArtifactOverlay(artifact, hasNext) {
   const descEl = $('video-artifact-desc');
   const playBtn = $('btn-video-artifact-play-puzzle');
   const previewImg = $('video-artifact-preview');
+  const audioBtn = $('btn-video-artifact-audio');
   if (!overlay || !imgEl || !titleEl || !descEl) return;
 
   setNativeVideoControlsSuppressed($('chapter-video'), true);
@@ -804,6 +837,17 @@ function showVideoArtifactOverlay(artifact, hasNext) {
   videoArtifactPrimaryId = artifact.id || null;
   setVideoArtifactModalPage(0);
   syncVideoToolScrollIndicator();
+  
+  // 更新音频按钮状态
+  if (audioBtn) {
+    if (artifact.audio) {
+      audioBtn.style.display = '';
+      audioBtn.disabled = false;
+      updateArtifactAudioButton(artifact.id);
+    } else {
+      audioBtn.style.display = 'none';
+    }
+  }
 
   const previewSrc = (videoArtifactPrimaryId && getPreviewImageSrcForArtifact(videoArtifactPrimaryId)) || artifact.image;
   if (previewImg) previewImg.src = previewSrc;
@@ -1650,6 +1694,71 @@ function gotoNextLevel() {
   }
 }
 
+function toggleArtifactAudio() {
+  const artifact = videoArtifactPrimaryId ? ARTIFACTS_CATALOG[videoArtifactPrimaryId] : null;
+  if (!artifact || !artifact.audio) return;
+
+  if (!artifactAudioPlayer) {
+    artifactAudioPlayer = new Audio();
+    artifactAudioPlayer.addEventListener('ended', () => {
+      currentPlayingArtifactId = null;
+      updateArtifactAudioButton(videoArtifactPrimaryId);
+    });
+    artifactAudioPlayer.addEventListener('pause', () => {
+      updateArtifactAudioButton(videoArtifactPrimaryId);
+    });
+    artifactAudioPlayer.addEventListener('play', () => {
+      updateArtifactAudioButton(videoArtifactPrimaryId);
+    });
+  }
+
+  if (currentPlayingArtifactId === artifact.id && !artifactAudioPlayer.paused) {
+    // 正在播放当前器具音频，点击暂停
+    artifactAudioPlayer.pause();
+    currentPlayingArtifactId = null;
+  } else {
+    // 播放或切换音频
+    if (artifactAudioPlayer.src !== artifact.audio) {
+      artifactAudioPlayer.src = artifact.audio;
+    }
+    currentPlayingArtifactId = artifact.id;
+    const p = artifactAudioPlayer.play();
+    if (p && typeof p.catch === 'function') {
+      p.catch((err) => {
+        console.warn('音频播放失败', err);
+        currentPlayingArtifactId = null;
+        updateArtifactAudioButton(videoArtifactPrimaryId);
+      });
+    }
+  }
+}
+
+function stopArtifactAudio() {
+  if (artifactAudioPlayer && !artifactAudioPlayer.paused) {
+    artifactAudioPlayer.pause();
+    artifactAudioPlayer.currentTime = 0;
+  }
+  currentPlayingArtifactId = null;
+  updateArtifactAudioButton(videoArtifactPrimaryId);
+}
+
+function updateArtifactAudioButton(artifactId) {
+  const btn = $('btn-video-artifact-audio');
+  if (!btn) return;
+  
+  const isPlaying = currentPlayingArtifactId === artifactId && artifactAudioPlayer && !artifactAudioPlayer.paused;
+  
+  if (isPlaying) {
+    btn.textContent = '⏸ 暂停';
+    btn.classList.add('playing');
+    btn.setAttribute('aria-label', '暂停音频');
+  } else {
+    btn.textContent = '🔊 播放介绍';
+    btn.classList.remove('playing');
+    btn.setAttribute('aria-label', '播放音频介绍');
+  }
+}
+
 function initGlobalEvents() {
   const startBtn = $('btn-start');
   const homeStartBtn = $('btn-home-start');
@@ -1812,6 +1921,12 @@ function initGlobalEvents() {
   if (videoArtifactPlayPuzzleBtn) {
     videoArtifactPlayPuzzleBtn.addEventListener('click', () => {
       openMiniPuzzleFromArtifactModal();
+    });
+  }
+  const videoArtifactAudioBtn = $('btn-video-artifact-audio');
+  if (videoArtifactAudioBtn) {
+    videoArtifactAudioBtn.addEventListener('click', () => {
+      toggleArtifactAudio();
     });
   }
   const toolScrollBtn = $('btn-video-tool-scroll');
